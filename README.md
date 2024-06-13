@@ -24,12 +24,8 @@
 ## Profile
 | Language / IDE           | Badge |
 |--------------------------|-------|
-| C#                       | [![C# Badge](https://img.shields.io/badge/-Visual%20Studio-239120?style=flat&logo=C-Sharp&logoColor=white)](https://github.com/search?l=C%23&q=user%3Azmcx16&type=Repositories) |
-| Python                   | [![Python Badge](https://img.shields.io/badge/-PyCharm-3776AB?style=flat&logo=Python&logoColor=white)](https://github.com/search?l=Python&q=user%3Azmcx16&type=Repositories) |
-| Html+CSS+Javascript      | [![Html+CSS+Javascript Badge](https://img.shields.io/badge/-Visual%20Studio%20Code-F7DF1E?style=flat&logo=Javascript&logoColor=white)](https://github.com/search?l=JavaScript&q=user%3Azmcx16&type=Repositories) |
-| C++                      | [![C++ Badge](https://img.shields.io/badge/-Visual%20Studio-00599C?style=flat&logo=C%2B%2B&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories) |
-| C                        | [![C Badge](https://img.shields.io/badge/-Visual%20Studio-A8B9CC?style=flat&logo=C&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories) |
-| JAVA                     | [![JAVA Badge](https://img.shields.io/badge/-Eclipse-007396?style=flat&logo=Java&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories) |
+| JAVA                     | [![Java Badge](https://img.shields.io/badge/-JetBrains-000000?style=flat&logo=JetBrains&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
+| CSS                    | [![CSS Badge](https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=CSS3&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
 
 
 
