@@ -1,8 +1,8 @@
 ### <h1 align="center"> Hello Welcome to UMM Library Project :) </h1>
 <p align="center">
 •●•
-<h1 align="center">NF_Ramz & Wiroo <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="40"></h1>
-<p align="center">
+<h1 align="center">I'm NF_Ramz <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="40"></h1>
+<p align="center"
   <a href="https://github.com/NFRamz"><img src="https://readme-typing-svg.herokuapp.com?lines=Universitas+Muhammadiyah+Malang;Fakultas+Teknik;Informatika;Pemograman+Berorientasi+Objek;Semester+2;&center=true&width=500&height=50"></a>
 </p>
 <br>
@@ -24,7 +24,7 @@
 ## Profile
 | Language / IDE           | Badge |
 |--------------------------|-------|
-| JAVA                     | [![Java Badge](https://img.shields.io/badge/-JetBrains-000000?style=flat&logo=JetBrains&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
+| JAVA                     |[![Java Badge](https://img.shields.io/badge/-JetBrains-9C27B0?style=flat&logo=JetBrains&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
 | CSS                    | [![CSS Badge](https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=CSS3&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
 
 
