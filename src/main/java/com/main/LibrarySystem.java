@@ -43,6 +43,7 @@ public class LibrarySystem extends Application {
 
         Admin adminObj = new Admin();
         Student studentObj = new Student();
+
         Student.arr_userStudent.add(new Student.UserStudent("Naufal Ramzi", "202310370311026", "Teknik", "Informatika"));
 
         primaryStage.setTitle("UMM Library");
