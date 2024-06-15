@@ -25,7 +25,7 @@
 | Language / IDE           | Badge |
 |--------------------------|-------|
 | IDE                    | [![IDE](https://img.shields.io/badge/-JetBrains-9C27B0?style=flat&logo=JetBrains&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
-| Language               | [![Java Badge](https://img.shields.io/badge/-Java-007396?style=flat&logo=Java&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)[![JavaFX Badge](https://img.shields.io/badge/-JavaFX-007396?style=flat&logo=Java&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
+| Language               | [![Java Badge](https://img.shields.io/badge/-Java-yellow?style=flat&logo=Java&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)  [![JavaFX Badge](https://img.shields.io/badge/-JavaFX-007396?style=flat&logo=Java&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
 | StyleSheet             | [![CSS Badge](https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=CSS3&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
 | Database               | [![SQL Badge](https://img.shields.io/badge/-SQL-008000?style=flat&logo=SQL&logoColor=white)](https://example.com)|
 
