@@ -102,10 +102,10 @@ public class User {
 
 
         //Table acces array book
-            for (Book i : Book.arr_bookList) {
-                tableView.getItems().add(i);
+        for (Book i : Book.arr_bookList) {
+            tableView.getItems().add(i);
 
-            }
+        }
 
         //Notification settings
         borrowBookFailedLabel.setVisible(false);
