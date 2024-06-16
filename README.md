@@ -24,12 +24,13 @@
 ## Profile
 | Language / IDE           | Badge |
 |--------------------------|-------|
-| JAVA                     |[![Java Badge](https://img.shields.io/badge/-JetBrains-9C27B0?style=flat&logo=JetBrains&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
-| CSS                    | [![CSS Badge](https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=CSS3&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
-
+| IDE                    | [![IDE](https://img.shields.io/badge/-JetBrains-9C27B0?style=flat&logo=JetBrains&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
+| Language               | [![Java Badge](https://img.shields.io/badge/-Java-yellow?style=flat&logo=Java&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)  [![JavaFX Badge](https://img.shields.io/badge/-JavaFX-007396?style=flat&logo=Java&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
+| StyleSheet             | [![CSS Badge](https://img.shields.io/badge/-CSS-1572B6?style=flat&logo=CSS3&logoColor=white)](https://github.com/search?q=user%3Azmcx16&type=Repositories)|
+| Database               | [![SQL Badge](https://img.shields.io/badge/-SQL-008000?style=flat&logo=SQL&logoColor=white)](https://example.com)|
 
 
 Reach Me                 | [![Gmail Badge](https://img.shields.io/badge/-Gmail-e54448?style=flat&logo=Gmail&logoColor=white)](mailto:noname) [![](https://img.shields.io/badge/Facebook-blue?logo=Facebook&logoColor=blue&labelColor=white)](https://www.facebook.com)[![](https://img.shields.io/badge/Whatsapp-CHAT-red?logo=Whatsapp&logoColor=Brightgreen&labelColor=white)](https://wa.me/62895631580403?text=Asalamualaikum+bang)
 
 
-Last Edited on: 10/06/2024
+Last Edited on: 16/06/2024
