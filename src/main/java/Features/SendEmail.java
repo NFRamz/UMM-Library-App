@@ -14,8 +14,6 @@ public class SendEmail {
     public void sendEmail(String recipientEmail, String subject, String body) {
         final String username = "umm.library.app@gmail.com";
         final String password ="arrejqjzczfxspsh";
-
-        //kode sandi aplikasi akun nf
         //"sdflytbkvrfqjgsi";
 
         Properties props = new Properties();
