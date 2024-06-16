@@ -4,7 +4,7 @@ package data;
 import books.Book;
 
 import com.main.LibrarySystem;
-import exception.custom.IllegalAdminAccess;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -345,17 +345,5 @@ public class Student extends User implements iMenu {
 
         });
 
-    }
-
-    public boolean isStudents(TextField username) throws IllegalAdminAccess {
-        if (username.getText().length() == 15) {
-            for (UserStudent i : arr_userStudent) {
-                if (i.nim.equals(username.getText())) {
-                    menu();
-                    return true;
-                }
-            }
-        }
-        throw new IllegalAdminAccess("NIM tidak dapat ditemukan");
     }
 }

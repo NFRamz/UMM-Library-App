@@ -1,5 +1,6 @@
 package com.main;
 
+import Features.*;
 import books.Book;
 import data.Admin;
 import data.Student;
@@ -32,7 +33,7 @@ import sound.Sound;
 
 public class LibrarySystem extends Application {
 
-    public static String NIM;
+    public final static TextField usernameField = new TextField();
 
     public static void main(String[] args) {
         launch(args);
@@ -40,10 +41,13 @@ public class LibrarySystem extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        menuGUI();
+    }
 
+    public void menuGUI(){
         Admin adminObj = new Admin();
         Student studentObj = new Student();
-
+        Stage primaryStage = new Stage();
         Student.arr_userStudent.add(new Student.UserStudent("Naufal Ramzi", "202310370311026", "Teknik", "Informatika"));
 
         primaryStage.setTitle("UMM Library");
@@ -58,7 +62,7 @@ public class LibrarySystem extends Application {
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FIELD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         //Field
-        TextField usernameField     = new TextField();
+
         PasswordField passwordField = new PasswordField();
 
         //Field prompt
@@ -197,31 +201,28 @@ public class LibrarySystem extends Application {
         StackPane stackPane = new StackPane();
         stackPane.getChildren().addAll(backgroundImageView,blurShape,errorElementGroup,rectangle,grid,logoImageView,logoNameImageView);
 
-        Scene scene =  new Scene(stackPane);
-
-        //Create Window
+        Scene scene = new Scene(stackPane);
+        primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
-        primaryStage.setScene(scene);
         primaryStage.show();
 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Action Button <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        //Action Button
+
         loginButtom.setOnAction(event ->{
-            if(usernameField.getText().equals(Admin.adminusername) && passwordField.getText().equals(Admin.adminpassword)) {
+            if(Database.admin_login_checker(usernameField.getText(), passwordField.getText())){
 
                 adminObj.menu();
                 primaryStage.close();
 
             }else if(usernameField.getText().length() == 15){
                 try {
-                    if(studentObj.isStudents(usernameField)){
-                        Book.arr_bookList.add(new Book("UMM-026-224","Laskar Pelangi","Andrea Hirata","Story Book",3));
-                        Book.arr_bookList.add(new Book("UMM-011-212","Perempuan Bersampur Merah","Andaru Intan","History BOok",2));
-                            errorLoginMessage.setVisible(false);
-                            primaryStage.close();
+                    if(Database.student_login_checker(usernameField.getText(), passwordField.getText())) {
 
+                        studentObj.menu();
+                        errorLoginMessage.setVisible(false);
+                        primaryStage.close();
                     }
+
                 } catch (IllegalAdminAccess message) {
                     errorLoginMessage.setText(message.getMessage());
                     errorElementGroup.setVisible(true);
@@ -235,8 +236,7 @@ public class LibrarySystem extends Application {
                 errorElementGroup.setVisible(true);
                 translateTransition.play();
 
-                }
+            }
         });
-
     }
 }

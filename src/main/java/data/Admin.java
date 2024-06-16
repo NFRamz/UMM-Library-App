@@ -1,5 +1,6 @@
 package data;
 
+import Features.Database;
 import com.main.LibrarySystem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,17 +25,10 @@ import java.util.Random;
 
 public class Admin extends User implements iMenu {
 
-    //=================================== ATRIBUT =====================================
-    public static String adminusername = "1";
-    public static String adminpassword = "1";
-
-//=================================== Main & Start Method ==================================
-
-
-
 //======================================= MENU Method =======================================
     @Override
     public void menu(){
+
         Stage adminMenuStage = new Stage();
         adminMenuStage.setTitle("UMM Library - Admin Menu");
 
@@ -62,7 +56,7 @@ public class Admin extends User implements iMenu {
         //Font Color
         sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
 
-        //Css Buton
+        //Css Button
         addStudentButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
         displayStudentButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
         addBookButton.getStylesheets().add("file:src/main/java/css/Login_button.css");

@@ -1,7 +1,9 @@
 package data;
 
+import Features.Database;
 import Features.DragAndDrop_table;
 import books.*;
+import com.main.LibrarySystem;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,6 +14,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import Features.SendEmail;
+
+import java.sql.SQLException;
 
 
 public class User {
@@ -96,6 +100,7 @@ public class User {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
+        Database.book_display();
         //Table acces array book
         for (Book i : Book.arr_bookList) {
             tableView.getItems().add(i);
@@ -168,7 +173,11 @@ public class User {
 
 
                             SendEmail snobj = new SendEmail();
-                            String recipientEmail = "nframzi051@gmail.com"; // Replace with the recipient's email
+                            try {
+                                String email = Database.getEmailbyNIM(LibrarySystem.usernameField.getText());
+                            }catch (SQLException e)
+                            String recipientEmail = email;
+
                             String subject = "Peminjaman Buku Berhasil!";
                             String body ="Terimakasih telah berkunjung ke perpustakaan pusat UMM.\n"
                                         + "Berikut lampiran tentang buku yang telah dipinjam :\n"
@@ -345,8 +354,10 @@ public class User {
         gridAddBook.add(authorField, 2,3);
         gridAddBook.add(stockField,2,4);
 
-        gridAddBook.add(submitButton,2,5);
+        gridAddBook.add(submitButton,3,5);
+        gridAddBook.add(returnButton, 2,5);
 
+        returnButton.setTranslateX(-22);
 
         Scene addbookScene = new Scene(gridAddBook,1360,720);
         addbookStage.setScene(addbookScene);
