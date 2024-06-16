@@ -100,12 +100,12 @@ public class User {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
-        Database.book_display();
-        //Table acces array book
-        for (Book i : Book.arr_bookList) {
-            tableView.getItems().add(i);
 
-        }
+        //Table acces array book
+            for (Book i : Book.arr_bookList) {
+                tableView.getItems().add(i);
+
+            }
 
         //Notification settings
         borrowBookFailedLabel.setVisible(false);
@@ -173,40 +173,44 @@ public class User {
 
 
                             SendEmail snobj = new SendEmail();
+                            String nim = LibrarySystem.usernameField.getText();
                             try {
-                                String email = Database.getEmailbyNIM(LibrarySystem.usernameField.getText());
-                            }catch (SQLException e)
-                            String recipientEmail = email;
+                                String recipientEmail = Database.getEmailbyNIM(nim);
+                                if (recipientEmail != null) {
+                                    String subject = "Peminjaman Buku Berhasil!";
+                                    String body = "Terimakasih telah berkunjung ke perpustakaan pusat UMM.\n"
+                                            + "Berikut lampiran tentang buku yang telah dipinjam :\n\n"
+                                            + "Book ID    : " + i.getBookId() + "\n"
+                                            + "Title      : " + i.getTitle() + "\n"
+                                            + "Category   : " + i.getCategory() + "\n"
+                                            + "Duration of borrowing : " + inputwaktuPinjaman + " days\n\n"
+                                            + snobj.dateinfo();
 
-                            String subject = "Peminjaman Buku Berhasil!";
-                            String body ="Terimakasih telah berkunjung ke perpustakaan pusat UMM.\n"
-                                        + "Berikut lampiran tentang buku yang telah dipinjam :\n"
-                                        + "\nBook ID    : " + i.getBookId()  + "\n"
-                                        + "Title          : " + i.getTitle() + "\n"
-                                        + "Category  : " + i.getCategory() + "\n"
-                                        + "Duration of borrowing : " + inputwaktuPinjaman + " days\n"+"\n"
-                                        +snobj.dateinfo();
+                                    waitLabel.setVisible(true);
+                                    borrowBookFailedLabel.setVisible(false);
+                                    borrowBookSuccesLabel.setVisible(false);
+                                    bookStockEmptyLabel.setVisible(false);
+                                    idNotFoundLabel.setVisible(false);
 
+                                    // Hide the wait label and show the success label when the email task is complete
+                                    Platform.runLater(() -> {
+                                        snobj.sendEmail(recipientEmail, subject, body);
+                                        tableView.refresh();
+                                        waitLabel.setVisible(false);
+                                        borrowBookFailedLabel.setVisible(false);
+                                        borrowBookSuccesLabel.setVisible(true);
+                                        bookStockEmptyLabel.setVisible(false);
+                                        idNotFoundLabel.setVisible(false);
+                                    });
 
-                             waitLabel.setVisible(true);
-                            borrowBookFailedLabel.setVisible(false);
-                            borrowBookSuccesLabel.setVisible(false);
-                            bookStockEmptyLabel.setVisible(false);
-                            idNotFoundLabel.setVisible(false);
+                                } else {
+                                    System.out.println("Email tidak ditemukan untuk NIM " + nim);
+                                }
+                            } catch (SQLException e) {
+                                System.out.println("Terjadi kesalahan saat mencari email untuk NIM " + nim + ": " + e.getMessage());
+                            }
 
-                            // Hide the wait label and show the success label when the email task is complete
-                            Platform.runLater(() -> {
-                                snobj.sendEmail(recipientEmail, subject, body);
-                                tableView.refresh();
-                                waitLabel.setVisible(false);
-                                borrowBookFailedLabel.setVisible(false);
-                                borrowBookSuccesLabel.setVisible(true);
-                                bookStockEmptyLabel.setVisible(false);
-                                idNotFoundLabel.setVisible(false);
-
-                            });
-
-                        break;
+                            break;
                         }else{
                             borrowBookFailedLabel.setVisible(true);
                             borrowBookSuccesLabel.setVisible(false);
