@@ -13,9 +13,11 @@ module Tugas_6_JavaFX{
         requires com.almasb.fxgl.all;
         requires java.mail;
         requires activation;
+        requires java.sql;
+        requires sqlite.jdbc;
 
 
-    opens books to javafx.base;
+        opens books to javafx.base;
         exports books;
 
         opens sound to javafx.media;
