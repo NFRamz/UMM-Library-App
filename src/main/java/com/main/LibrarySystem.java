@@ -1,7 +1,6 @@
 package com.main;
 
-import Features.*;
-import books.Book;
+import Features.Database;
 import data.Admin;
 import data.Student;
 import exception.custom.IllegalAdminAccess;
@@ -11,10 +10,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,7 +23,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import sound.Sound;
-
 
 
 
@@ -72,6 +67,12 @@ public class LibrarySystem extends Application {
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> BUTTON <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         //Button
         Button loginButtom = new Button("Login");
+        loginButtom.getStylesheets().add("file:src/main/java/css/Login_button.css");
+
+        Button closeButton = new Button("X");
+        closeButton.getStylesheets().add("file:src/main/java/css/closeButton.css");
+        Tooltip closeButtonPopup = new Tooltip("Exit");
+        Tooltip.install(closeButton, closeButtonPopup);
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> IMAGE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         //Image
@@ -100,9 +101,6 @@ public class LibrarySystem extends Application {
 
         //Font Color
         errorLoginMessage.setStyle("-fx-text-fill: #FFFFFF;");
-
-        //Css button
-        loginButtom.getStylesheets().add("file:src/main/java/css/Login_button.css");
 
         //Image size
         logoImageView.setFitHeight(120);
@@ -152,6 +150,9 @@ public class LibrarySystem extends Application {
 
         loginButtom.setTranslateY(63);
 
+        closeButton.setTranslateX(645);
+        closeButton.setTranslateY(-355);
+
         errorLoginMessage.setTranslateX(69);
         errorLoginMessage.setTranslateY(48);
 
@@ -160,6 +161,7 @@ public class LibrarySystem extends Application {
 
         blurShape.setTranslateX(0);
         blurShape.setTranslateY(0);
+
 
         //Grid Layout
         GridPane grid = new GridPane();
@@ -190,16 +192,10 @@ public class LibrarySystem extends Application {
         translateTransition1.setFromY(200);
         translateTransition1.setToY(170);
 
-        PauseTransition delay = new PauseTransition(Duration.seconds(3));
-        delay.setOnFinished(event1 -> {
-            translateTransition1.play();
-            PauseTransition delay1 = new PauseTransition(Duration.seconds(2));
-            delay1.setOnFinished(event2 -> errorElementGroup.setVisible(false));
-        });
 
         //Overwrite element
         StackPane stackPane = new StackPane();
-        stackPane.getChildren().addAll(backgroundImageView,blurShape,errorElementGroup,rectangle,grid,logoImageView,logoNameImageView);
+        stackPane.getChildren().addAll(backgroundImageView,blurShape,errorElementGroup,rectangle,grid,logoImageView,logoNameImageView,closeButton);
 
         Scene scene = new Scene(stackPane);
         primaryStage.setScene(scene);
@@ -207,22 +203,37 @@ public class LibrarySystem extends Application {
         primaryStage.setFullScreenExitHint("");
         primaryStage.show();
 
+        //Action Button
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(event1 -> {
+            translateTransition1.play();
+            PauseTransition delay1 = new PauseTransition(Duration.seconds(2));
+            delay1.setOnFinished(event2 -> errorElementGroup.setVisible(false));
+        });
 
-        loginButtom.setOnAction(event ->{
-            if(Database.admin_login_checker(usernameField.getText(), passwordField.getText())){
+        closeButton.setOnAction(event -> primaryStage.close());
 
+        loginButtom.setOnAction(event -> {
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+
+            if (Database.admin_login_checker(username, password)) {
                 adminObj.menu();
                 primaryStage.close();
-
-            }else if(usernameField.getText().length() == 15){
+            } else {
                 try {
-                    if(Database.student_login_checker(usernameField.getText(), passwordField.getText())) {
-
+                    if (username.length() == 15 && Database.student_login_checker(username, password)) {
+                        Database.book_display();
                         studentObj.menu();
                         errorLoginMessage.setVisible(false);
                         primaryStage.close();
+                    } else {
+                        // Kondisi untuk aksi jika kredensial tidak cocok dengan admin dan bukan siswa
+                        delay.play();
+                        Sound.falseLogin();
+                        errorElementGroup.setVisible(true);
+                        translateTransition.play();
                     }
-
                 } catch (IllegalAdminAccess message) {
                     errorLoginMessage.setText(message.getMessage());
                     errorElementGroup.setVisible(true);
@@ -230,13 +241,8 @@ public class LibrarySystem extends Application {
                     Sound.falseLogin();
                     translateTransition.play();
                 }
-            }else{
-                delay.play();
-                Sound.falseLogin();
-                errorElementGroup.setVisible(true);
-                translateTransition.play();
-
             }
         });
+
     }
 }
