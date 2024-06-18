@@ -1,7 +1,7 @@
 .button {
     /* Font style */
-    -fx-font-size: 14; /* Font size */
-    -fx-text-fill: black; /* Black text */
+    -fx-font-size: 14;
+    -fx-text-fill: black;
 
     /*Shape settings*/
     -fx-background-radius: 30; /* Rounded rectangle shape */
@@ -23,7 +23,9 @@
     -fx-background-color: maroon; /* Background color change on hover */
     -fx-text-fill: white; /* Text color change on hover */
 
-
 }
+
+
+
 
 

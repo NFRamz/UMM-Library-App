@@ -3,8 +3,7 @@ package data;
 
 import books.Book;
 
-import com.main.LibrarySystem;
-
+import Main.Main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -189,8 +188,8 @@ public class Student extends User implements iMenu {
         });
 
         logoutButton.setOnAction(event -> {
-            LibrarySystem librarySystemObj = new LibrarySystem();
-            librarySystemObj.start(new Stage());
+            Main mainobj = new Main();
+            mainobj.start(new Stage());
             studentMenuStage.close();
         });
 

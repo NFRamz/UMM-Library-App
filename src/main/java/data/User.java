@@ -3,7 +3,6 @@ package data;
 import Features.Database;
 import Features.DragAndDrop_table;
 import books.*;
-import com.main.LibrarySystem;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -102,10 +101,10 @@ public class User {
 
 
         //Table acces array book
-        for (Book i : Book.arr_bookList) {
-            tableView.getItems().add(i);
+            for (Book i : Book.arr_bookList) {
+                tableView.getItems().add(i);
 
-        }
+            }
 
         //Notification settings
         borrowBookFailedLabel.setVisible(false);
@@ -173,7 +172,7 @@ public class User {
 
 
                             SendEmail snobj = new SendEmail();
-                            String nim = LibrarySystem.usernameField.getText();
+                            String nim = LoginMenu.usernameField.getText();
                             try {
                                 String recipientEmail = Database.getEmailbyNIM(nim);
                                 if (recipientEmail != null) {

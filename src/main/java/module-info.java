@@ -23,7 +23,9 @@ module Tugas_6_JavaFX{
         opens sound to javafx.media;
         exports sound;
 
-        opens com.main to javafx.fxml;
-        exports com.main;
+        opens Main to javafx.fxml;
+        exports Main;
+        exports data;
+        opens data to javafx.fxml;
 
-        }
+}

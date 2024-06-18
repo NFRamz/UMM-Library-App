@@ -1,6 +1,7 @@
 package books;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Book {
 
@@ -11,7 +12,7 @@ public class Book {
     private String category;
     private int stock;
     private int duration;
-
+    private Objects database;
 
     //ArrayList untuk menyimpan list buku yang terdaftar.
     public static ArrayList<Book> arr_bookList = new ArrayList<>();

@@ -1,7 +1,6 @@
 package data;
 
-import Features.Database;
-import com.main.LibrarySystem;
+import Main.Main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -123,8 +122,8 @@ public class Admin extends User implements iMenu {
         });
 
         logoutButton.setOnAction(event -> {
-            LibrarySystem librarySystemObj = new LibrarySystem();
-            librarySystemObj.start(new Stage());
+            Main mainobj = new Main();
+            mainobj.start(new Stage());
             adminMenuStage.close();
         });
 
