@@ -140,14 +140,31 @@ public class Admin extends User implements iMenu {
 
         //Label
         Label sceneTitle    = new Label("Tambah Mahasiswa");
+        sceneTitle.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 25));
+        sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
+        
         Label nameLabel     = new Label("Nama");
+        nameLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+
         Label nimLabel      = new Label("NIM");
+        nimLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+
         Label fakultasLabel = new Label("Fakultas");
+        fakultasLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+
         Label jurusanLabel  = new Label("Jurusan");
+        jurusanLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+
 
         //Notification Label
         Label sumbitFailed = new Label("NIM harus 15 digit!");
+        sumbitFailed.setStyle("-fx-text-fill: #FF1E1E;");
+        sumbitFailed.setFont(Font.font("Calibri Body",FontWeight.BOLD,15));
         sumbitFailed.setVisible(false);
+
+        //Image
+        Image backgroundImage = new Image("file:src/main/java/image/add_student.png");
+        ImageView backgroundImageView = new ImageView(backgroundImage);
 
         //Button
         Button submitButton = new Button("Submit");
@@ -155,49 +172,48 @@ public class Admin extends User implements iMenu {
 
         //Field
         TextField nameField     = new TextField();
+        nameField.setPromptText("Masukkan Nama");
+
         TextField nimField      = new TextField();
+        nimField.setPromptText("MIN.15 Digit");
+
         TextField fakultasField = new TextField();
+        fakultasField.setPromptText("Masukkan Fakultas");
+
         TextField jurusanField  = new TextField();
-
-        //Font Style
-        sceneTitle.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        nameLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
-        nimLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
-        fakultasLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
-        jurusanLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
-        sumbitFailed.setFont(Font.font("Calibri Body",FontWeight.BOLD,15));
-
-        //Font Color
-        sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
-        sumbitFailed.setStyle("-fx-text-fill: #FF1E1E;");
+        jurusanField.setPromptText("Masukkan nama jurusan");
 
 
         //Grid Layout
         GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
+        grid.setAlignment(Pos.CENTER_RIGHT);
         grid.add(sceneTitle, 0,0);
 
         grid.add(nameLabel, 0,1);
-        grid.add(nimLabel, 0,2);
-        grid.add(fakultasLabel, 0,3);
-        grid.add(jurusanLabel, 0,4);
+        grid.add(nameField, 0,2);
 
-        grid.add(nameField, 1,1);
-        grid.add(nimField, 1,2);
-        grid.add(fakultasField, 1,3);
-        grid.add(jurusanField, 1,4);
+        grid.add(nimLabel, 0,3);
+        grid.add(nimField, 0,4);
+
+        grid.add(fakultasLabel, 0,5);
+        grid.add(fakultasField, 0,6);
+
+        grid.add(jurusanLabel, 0,7);
+        grid.add(jurusanField, 0,8);
 
 
-        grid.add(returnButton,1,5);
-        grid.add(submitButton,2,5);
+        grid.add(returnButton,0,9);
+        grid.add(submitButton,1,9);
 
-        grid.add(sumbitFailed, 0,5);
+        grid.add(sumbitFailed, 0,10);
 
         grid.setVgap(10);
-        grid.setHgap(0);
+        grid.setHgap(5);
 
+        //Window Settings
+        StackPane stackPane = new StackPane(backgroundImageView, grid);
 
-        Scene scene = new Scene(grid);
+        Scene scene = new Scene(stackPane);
         addStudentStage.setFullScreen(true);
         addStudentStage.setFullScreenExitHint("");
         addStudentStage.setScene(scene);
