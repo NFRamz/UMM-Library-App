@@ -1,5 +1,6 @@
 package data;
 
+import Features.Database;
 import Main.Main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -183,6 +184,7 @@ public class Admin extends User implements iMenu {
         jurusanField.setPromptText("Masukkan nama jurusan");
 
 
+
         //Grid Layout
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER_RIGHT);
@@ -256,18 +258,18 @@ public class Admin extends User implements iMenu {
         //Font Color
         sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
 
-        // Membuat ListView untuk menampilkan mahasiswa
-        ListView<String> listView = new ListView<>();
 
-        for (Student.UserStudent i : Student.arr_userStudent) {
-            String studentInfo = "Nama     : " + i.nama +"\n" +
-                                 "NIM      : " + i.nim + "\n" +
-                                 "Fakultas : " + i.fakultas + "\n" +
-                                 "Prodi    : " + i.prodi + "\n" +
-                                 "===========================";
-            listView.getItems().add(studentInfo);
+            // Buat ListView untuk menampilkan data mahasiswa
+            ListView<String> listView = new ListView<>();
+
+
+            Database.displayMahasiswa(listView);
+
+            // Lakukan sesuatu dengan listView, misalnya menampilkannya di GUI atau melakukan operasi lain
+            // Misalnya, Anda bisa mencetak isi listView ke konsol untuk debug
+        for (String item : listView.getItems()) {
+            System.out.println(item);
         }
-
         //Grid Layout
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);

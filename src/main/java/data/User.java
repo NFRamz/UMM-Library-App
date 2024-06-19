@@ -42,7 +42,7 @@ public class User {
         Label durationLabel = new Label("Berapa hari ingin meminjam buku?");
 
         //Notification Label
-        Label borrowBookFailedLabel  = new Label("Max 14 hari");
+        Label borrowBookFailedLabel  = new Label("Max 7 hari");
         Label borrowBookSuccesLabel  = new Label("Buku berhasil dipinjam");
         Label bookStockEmptyLabel    = new Label("Stok buku habis");
         Label idNotFoundLabel        = new Label("ID buku tidak ditemukan");
@@ -163,7 +163,7 @@ public class User {
                     if (i.getStock() != 0) {
                         int inputwaktuPinjaman = Integer.parseInt(durationField.getText());
 
-                        if(inputwaktuPinjaman != 0 && inputwaktuPinjaman <= 14 ) {
+                        if(inputwaktuPinjaman != 0 && inputwaktuPinjaman <= 7 ) {
                             int a = i.getStock();
                             a--;
                             i.setStock(a);

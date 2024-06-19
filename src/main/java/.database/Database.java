@@ -2,6 +2,7 @@ package Features;
 
 import books.Book;
 import exception.custom.IllegalAdminAccess;
+import javafx.scene.control.ListView;
 
 import java.sql.*;
 
@@ -76,6 +77,53 @@ public class Database {
         return email;
     }
 
+    // Method untuk menampilkan daftar mahasiswa di ListView
+    public static void displayMahasiswa(ListView<String> listView) {
+        String sql = "SELECT nim, pic, name, faculty, major, email FROM mahasiswa_credentials";
+
+        try (Connection conn = connect(user_database);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            listView.getItems().clear(); // Hapus semua item sebelum menambahkan yang baru
+
+            while (rs.next()) {
+                String studentInfo = "Nama     : " + rs.getString("name") + "\n" +
+                        "NIM      : " + rs.getString("nim") + "\n" +
+                        "Fakultas : " + rs.getString("faculty") + "\n" +
+                        "Prodi    : " + rs.getString("major") + "\n" +
+                        "Email    : " + rs.getString("email") + "\n" +
+                        "PIC      : " + rs.getString("pic") + "\n" +
+                        "===========================";
+
+                listView.getItems().add(studentInfo);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Gagal menampilkan data mahasiswa\n " + e.getMessage());
+        }
+    }
+
+    public static String getNamaByNIM(String nim) {
+        String sql = "SELECT name FROM mahasiswa_credentials WHERE nim = ?";
+        String nama = null;
+
+        try (Connection conn = connect(user_database);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nim);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                nama = rs.getString("name");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error retrieving name for NIM " + nim + ": " + e.getMessage());
+        }
+
+        return nama;
+    }
 
     //Admin database Settings
     public static void add_admin(String username, String password) {
@@ -95,7 +143,7 @@ public class Database {
         }
     }
 
-    public static boolean admin_login_checker(String username, String password)  {
+    public static boolean admin_login_checker(String username, String password) {
 
         String sql = "SELECT * FROM admin_credentials WHERE username = ? AND password = ?";
 
@@ -113,7 +161,6 @@ public class Database {
             return false;
         }
     }
-
 
 
     //=================================== Book method settings =================================
@@ -139,20 +186,21 @@ public class Database {
             System.out.println("Gagal menambahkan data mahasiswa ke database: " + e.getMessage());
         }
     }
+
     public static void book_display() {
         String sql = "SELECT * FROM book_data";
 
         try (Connection conn = connect(book_database);
              Statement stmt = conn.createStatement();
-             ResultSet rs   = stmt.executeQuery(sql)) {
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             // Iterasi hasil query dan tampilkan informasi buku
             while (rs.next()) {
-                String id       = rs.getString("id");
-                String title    = rs.getString("title");
-                String author   = rs.getString("author");
+                String id = rs.getString("id");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
                 String category = rs.getString("category");
-                int stock       = rs.getInt("stock");
+                int stock = rs.getInt("stock");
 
                 Book.arr_bookList.add(new Book(id, title, author, category, stock));
             }

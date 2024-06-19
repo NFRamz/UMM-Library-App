@@ -1,6 +1,7 @@
 package data;
 
 
+import Features.Database;
 import books.Book;
 
 import Main.Main;
@@ -20,16 +21,18 @@ import java.util.ArrayList;
 
 public class Student extends User implements iMenu {
     public static ArrayList<UserStudent> arr_userStudent = new ArrayList<>();
+    public static String[] userInfo;
 
     //Konstruktor untuk arraylist arr_userStudent.
     public static class UserStudent {
         String nama, nim, fakultas, prodi;
 
         public UserStudent(String nama, String nim, String fakultas, String prodi) {
-            this.nama = nama;
-            this.nim = nim;
-            this.fakultas = fakultas;
-            this.prodi = prodi;
+            this.nama       = nama;
+            this.nim        = nim;
+            this.fakultas   = fakultas;
+            this.prodi      = prodi;
+
         }
     }
 
@@ -42,11 +45,16 @@ public class Student extends User implements iMenu {
         //Label
         Label sceneTitle = new Label("Student Menu");
 
+        String nama = Database.getNamaByNIM(LoginMenu.usernameField.getText());
+        userInfo = new String[]{nama};
+        Label nameLabel  = new Label("Halo, "+userInfo[0]);
+
         //Font style
         sceneTitle.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-
+        nameLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         //Font color
         sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
+        nameLabel.setStyle("-fx-text-fill: white;");
 
         //Button
         Button borrowBookButton = new Button("Pinjam Buku");
@@ -116,6 +124,9 @@ public class Student extends User implements iMenu {
         gridTable.add(table, 0, 0);
 
         //Position
+        nameLabel.setTranslateX(510);
+        nameLabel.setTranslateY(-345);
+
         borrowBookButton.setTranslateX(-83);
         borrowBookButton.setTranslateY(-65);
 
@@ -129,7 +140,7 @@ public class Student extends User implements iMenu {
         table.setTranslateY(70);
 
         //StackPane
-        StackPane stackPaneStudentMenu = new StackPane(backgroundStudentMenu_view, gridTable, gridButton);
+        StackPane stackPaneStudentMenu = new StackPane(backgroundStudentMenu_view, gridTable, gridButton, nameLabel);
         Scene studentmenuScene = new Scene(stackPaneStudentMenu);
 
         studentMenuStage.setFullScreen(true);

@@ -31,7 +31,6 @@ public class Book {
     public Book(String category){
         this.category = category;
     }
-
     public Book(String bookId, int stock, int duration){
         this.bookId   = bookId;
         this.stock    = stock;

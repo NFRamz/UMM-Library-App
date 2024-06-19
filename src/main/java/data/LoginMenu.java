@@ -30,7 +30,7 @@ public class LoginMenu {
         Admin adminObj = new Admin();
         Student studentObj = new Student();
         Stage primaryStage = new Stage();
-        Student.arr_userStudent.add(new Student.UserStudent("Naufal Ramzi", "202310370311026", "Teknik", "Informatika"));
+
 
         primaryStage.setTitle("UMM Library");
 
