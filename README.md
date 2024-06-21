@@ -32,5 +32,9 @@
 
 Reach Me                 | [![Gmail Badge](https://img.shields.io/badge/-Gmail-e54448?style=flat&logo=Gmail&logoColor=white)](mailto:noname) [![](https://img.shields.io/badge/Facebook-blue?logo=Facebook&logoColor=blue&labelColor=white)](https://www.facebook.com)[![](https://img.shields.io/badge/Whatsapp-CHAT-red?logo=Whatsapp&logoColor=Brightgreen&labelColor=white)](https://wa.me/62895631580403?text=Asalamualaikum+bang)
 
-
+Preview:
+  ● Login Menu:
+<p align="center">
+  <img src="https://github.com/NFRamz/UMM-Library-App/blob/main/preview/Login%20menu.png" alt="Login Menu Preview">
+</p>
 Last Edited on: 16/06/2024
