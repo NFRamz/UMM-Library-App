@@ -2,36 +2,27 @@ package Features;
 
 import books.Book;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
-public class DragAndDrop_table extends TableCell<Book, String> {
-    private final TextField bookIdField;
+public class DragAndDrop_table {
 
-    public DragAndDrop_table(TextField bookIdField) {
-        this.bookIdField = bookIdField;
-        this.setOnMouseClicked(event -> mouseClick(event));
-    }
+    public static void setupDragAndDrop(TableColumn<Book, String> column, TextField bookIdField) {
+        column.setCellFactory(param -> new TableCell<>() {
 
-    @Override
-    protected void updateItem(String item, boolean empty) {
-        super.updateItem(item, empty);
-        if (!empty) {
-            setText(item);
-        } else {
-            setText(null);
-        }
-    }
+            {
+                setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 1) {
+                        bookIdField.setText(getItem());
+                    }
+                });
+            }
 
-
-    private void mouseClick(MouseEvent event) {
-        Book selectBook   = getTableView().getSelectionModel().getSelectedItem();
-
-        if (event.getClickCount() == 2) {
-
-                String bookId = selectBook.getBookId();
-                bookIdField.setText(bookId);
-
-        }
+            @Override
+           public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(item);
+            }
+        });
     }
 }
