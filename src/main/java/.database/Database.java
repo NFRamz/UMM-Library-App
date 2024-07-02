@@ -311,7 +311,7 @@ public class Database {
             }
         }
         deleteSql += add + ")";
-        
+
         PreparedStatement deleteStmt = conn.prepareStatement(deleteSql);
         deleteStmt.setString(1, nim);
         for (int i = 0; i < Book.arr_borrowedBook.size(); i++) {
