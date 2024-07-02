@@ -20,7 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import sound.Sound;
-import java.time.LocalDate;
+
 
 
 public class LoginMenu implements iMenu{
@@ -167,12 +167,10 @@ public class LoginMenu implements iMenu{
         closeButton.setOnAction(event -> primaryStage.close());
 
         loginButton.setOnAction(event -> {
+            String nim      = usernameField.getText();
             String username = usernameField.getText();
             String password = passwordField.getText();
-            String nim = usernameField.getText();
-            int duration = Database.student_getBorrowedBookDuration(nim);
-            LocalDate currentDate = LocalDate.now();
-            LocalDate returnDate = LocalDate.now().plusDays(duration);
+
 
             if (Database.admin_loginCheck(username, password)) {
 
@@ -182,6 +180,7 @@ public class LoginMenu implements iMenu{
                 try {
                     if (username.length() == 15 && Database.student_loginChecker(username, password)) {
                         if (Database.book_expiredDateBorrowedBook(nim)) {
+
                             Database.book_expiredBorrowedBookSendEmail(usernameField.getText());
                             errorLoginMessage.setText("Akun telah ditangguhkan !");
                             errorElementGroup.setVisible(true);

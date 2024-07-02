@@ -44,28 +44,6 @@ public class Database {
     }
 
 
-    public static int student_getBorrowedBookDuration(String nim) {
-
-        String sql = "SELECT duration FROM borrowed_books WHERE nim = ?";
-        int duration = 0;
-
-        try (Connection conn = connect(book_database);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, nim);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                duration = rs.getInt("duration");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error retrieving duration for NIM " + nim + ": " + e.getMessage());
-        }
-
-        return duration;
-    }
-
 
     public static boolean student_loginChecker(String nim, String pic) throws IllegalAdminAccess {
 
@@ -81,7 +59,7 @@ public class Database {
             return rs.next();
 
         } catch (SQLException e) {
-            throw new IllegalAdminAccess("Err: SLS_method_database");
+            throw new IllegalAdminAccess("Error = Database.student_loginChecker");
         }
     }
 
@@ -101,7 +79,7 @@ public class Database {
                 email = rs.getString("email");
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving email for NIM " + nim + ": " + e.getMessage());
+            System.out.println("Error = Database.student_getEmailbyNIM");
         }
 
         return email;
@@ -123,7 +101,7 @@ public class Database {
                 nama = rs.getString("name");
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving name for NIM " + nim + ": " + e.getMessage());
+            System.out.println("Error = Database.student_getNamaByNIM");
         }
 
         return nama;
@@ -162,12 +140,12 @@ public class Database {
             }
 
         } catch (SQLException e) {
-            System.out.println("Gagal menampilkan data buku yang dipinjam: " + e.getMessage());
+            System.out.println("Error = Database.student_displayBorrowedBooks ");
         }
     }
 
     public static void student_saveBorrowedBooks(String nim) {
-        String sql = "INSERT OR REPLACE INTO borrowed_books (nim, book_id, title, author, category, duration, expired_borrowedBook) VALUES (?, ?, ?, ?, ?, ?,?)";
+        String sql = "INSERT REPLACE INTO borrowed_books (nim, book_id, title, author, category, duration, expired_borrowedBook) VALUES (?, ?, ?, ?, ?, ?,?)";
         try (Connection conn = connect(book_database);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -209,7 +187,7 @@ public class Database {
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
-            return rs.next(); // true jika ada baris hasil, false jika tidak
+            return rs.next();
 
         } catch (SQLException e) {
             System.out.println("Gagal memeriksa kredensial admin: " + e.getMessage());
@@ -310,10 +288,10 @@ public class Database {
             }
 
             updateStockStmt.executeBatch();
-            System.out.println("Stock for all books updated successfully.");
+            System.out.println("berhasil update semua stok buku.");
 
         } catch (SQLException e) {
-            System.out.println("Failed to update stock for books: " + e.getMessage());
+            System.out.println("Error = Database.updateBookStock");
         }
     }
 
@@ -323,18 +301,17 @@ public class Database {
             student_saveBorrowedBooks(nim);
         }
 
-        // Delete returned books (not in arr_borrowedBook)
         Connection conn = connect(book_database);
         String deleteSql = "DELETE FROM borrowed_books WHERE nim = ? AND book_id NOT IN (";
-        StringBuilder inClause = new StringBuilder();
+        StringBuilder add = new StringBuilder();
         for (int i = 0; i < Book.arr_borrowedBook.size(); i++) {
-            inClause.append("?");
+            add.append("?");
             if (i < Book.arr_borrowedBook.size() - 1) {
-                inClause.append(",");
+                add.append(",");
             }
         }
-        deleteSql += inClause.toString() + ")";
-
+        deleteSql += add + ")";
+        .
         PreparedStatement deleteStmt = conn.prepareStatement(deleteSql);
         deleteStmt.setString(1, nim);
         for (int i = 0; i < Book.arr_borrowedBook.size(); i++) {
@@ -373,14 +350,14 @@ public class Database {
             ResultSet rs = pstmt.executeQuery();
 
             LocalDate currentDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             StringBuilder emailBody = new StringBuilder();
             long totalDenda = 0;
 
             while (rs.next()) {
                 String bookId = rs.getString("book_id");
                 String title = rs.getString("title");
-                LocalDate expiredDate = LocalDate.parse(rs.getString("expired_borrowedBook"), formatter);
+                LocalDate expiredDate = LocalDate.parse(rs.getString("expired_borrowedBook"), formatTime);
                 long daysLate = java.time.temporal.ChronoUnit.DAYS.between(expiredDate, currentDate);
 
                 if (!expiredDate.isAfter(currentDate)) {
@@ -397,6 +374,7 @@ public class Database {
 
             String recipientEmail = student_getEmailbyNIM(nim);
             String nama = student_getNamaByNIM(nim);
+
             if (recipientEmail != null) {
                 String subject = "Denda Keterlambatan Pengembalian Buku";
                 String body = "Yth. Kepada:\n" +
@@ -404,7 +382,7 @@ public class Database {
                         "NIM: " + nim + "\n\n" +
                         "Akun anda kami tangguhkan dikarenakan buku yang anda pinjam telah melewati tanggal pengembalian yang sudah ditentukan. " +
                         "Oleh karena itu, anda dikenai denda sebagaimana untuk rinciannya sebagai berikut:\n\n" +
-                        emailBody.toString() +
+                        emailBody +
                         "Total Denda: Rp. " + totalDenda + "\n\n" +
                         "Silahkan untuk segera melunasi denda yang telah tertera untuk membuka penangguhan pada akun anda. Terimakasih.\n\n" +
                         "Hormat kami,\n" +
