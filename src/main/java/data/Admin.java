@@ -29,55 +29,43 @@ public class Admin extends User implements iMenu {
     @Override
     public void menu(){
 
-        Stage adminMenuStage = new Stage();
-        adminMenuStage.setTitle("UMM Library - Admin Menu");
 
         //Label
         Label sceneTitle = new Label("Menu Admin");
+        sceneTitle.setTranslateX(40);
+        sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
+        sceneTitle.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+
 
         //Button
         Button addStudentButton     = new Button("Tambah Mahasiswa");
+        addStudentButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
+
         Button displayStudentButton = new Button("Daftar Mahasiswa");
+        displayStudentButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
+
         Button addBookButton        = new Button("Tambah Buku");
+        addBookButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
+
         Button logoutButton         = new Button("Logout");
+        logoutButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
 
         //Image
-        Image backgroundImage = new Image("file:src/main/java/image/background_login_image.jpg");
+        Image backgroundImage = new Image("file:src/main/java/image/backgroundImage.png");
         ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView.setFitWidth(1366);
+        backgroundImageView.setFitHeight(768);
 
         //Shape
         Rectangle backgroundShape = new Rectangle();
-
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Settings Element <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-        //Font Style
-        sceneTitle.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-
-        //Font Color
-        sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
-
-        //Css Button
-        addStudentButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
-        displayStudentButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
-        addBookButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
-        logoutButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
-
-        //Shape rounded settings
-        backgroundShape.setArcWidth(50);
-        backgroundShape.setArcHeight(50);
-
-        //Shape size
         backgroundShape.setWidth(300);
         backgroundShape.setHeight(300);
-
-        //Shape color
-        backgroundShape.setFill(Color.WHITE);
-
-        //Position elements
-        sceneTitle.setTranslateX(40);
-
+        backgroundShape.setArcWidth(50);
+        backgroundShape.setArcHeight(50);
         backgroundShape.setTranslateX(0);
         backgroundShape.setTranslateY(15);
+        backgroundShape.setFill(Color.WHITE);
+
 
         //Grid Layout
         GridPane grid = new GridPane();
@@ -94,19 +82,22 @@ public class Admin extends User implements iMenu {
         grid.setHgap(5);
 
         //Overwrite elements
-
         StackPane stackPane = new StackPane();
         stackPane.getChildren().addAll(backgroundImageView, backgroundShape ,grid);
+
         Scene scene = new Scene(stackPane);
 
-
         //Create window
+        Stage adminMenuStage = new Stage();
+        adminMenuStage.setScene(scene);
+        adminMenuStage.setTitle("UMM Library - Admin Menu");
         adminMenuStage.setFullScreen(true);
         adminMenuStage.setFullScreenExitHint("");
-        adminMenuStage.setScene(scene);
+
         adminMenuStage.show();
 
-        //Action Button
+
+        //Button Action
         addStudentButton.setOnAction(event -> {
             addstudent();
             adminMenuStage.close();
@@ -133,11 +124,6 @@ public class Admin extends User implements iMenu {
 //===================================== Other Method =======================================
     public void addstudent() {
 
-        // Membuat form baru
-        Stage addStudentStage = new Stage();
-        addStudentStage.setTitle("Tambah Mahasiswa");
-
-
         //Label
         Label sceneTitle    = new Label("Tambah Mahasiswa");
         sceneTitle.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 25));
@@ -155,16 +141,21 @@ public class Admin extends User implements iMenu {
         Label jurusanLabel  = new Label("Jurusan");
         jurusanLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
 
+        Label emailLabel  = new Label("Email");
+        emailLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+
 
         //Notification Label
         Label sumbitFailed = new Label("NIM harus 15 digit!");
+        sumbitFailed.setVisible(false);
         sumbitFailed.setStyle("-fx-text-fill: #FF1E1E;");
         sumbitFailed.setFont(Font.font("Calibri Body",FontWeight.BOLD,15));
-        sumbitFailed.setVisible(false);
+
 
         //Image
         Image backgroundImage = new Image("file:src/main/java/image/add_student.png");
         ImageView backgroundImageView = new ImageView(backgroundImage);
+
 
         //Button
         Button submitButton = new Button("Submit");
@@ -183,6 +174,11 @@ public class Admin extends User implements iMenu {
         TextField jurusanField  = new TextField();
         jurusanField.setPromptText("Masukkan nama jurusan");
 
+        TextField emailField = new TextField();
+        emailField.setPromptText("alamat Email");
+
+        TextField picField = new TextField();
+        picField.setPromptText("PIC");
 
 
         //Grid Layout
@@ -202,11 +198,14 @@ public class Admin extends User implements iMenu {
         grid.add(jurusanLabel, 0,7);
         grid.add(jurusanField, 0,8);
 
+        grid.add(emailLabel, 0,9);
+        grid.add(emailField, 0,10);
 
-        grid.add(returnButton,0,9);
-        grid.add(submitButton,1,9);
 
-        grid.add(sumbitFailed, 0,10);
+        grid.add(returnButton,0,11);
+        grid.add(submitButton,1,11);
+
+        grid.add(sumbitFailed, 0,12);
 
         grid.setVgap(10);
         grid.setHgap(5);
@@ -215,9 +214,13 @@ public class Admin extends User implements iMenu {
         StackPane stackPane = new StackPane(backgroundImageView, grid);
 
         Scene scene = new Scene(stackPane);
+
+        Stage addStudentStage = new Stage();
+        addStudentStage.setScene(scene);
+        addStudentStage.setTitle("Tambah Mahasiswa");
         addStudentStage.setFullScreen(true);
         addStudentStage.setFullScreenExitHint("");
-        addStudentStage.setScene(scene);
+
         addStudentStage.show();
 
         //Action Button
@@ -225,7 +228,9 @@ public class Admin extends User implements iMenu {
             if (nimField.getText().length() == 15) {
                 Admin adminObj = new Admin();
 
-                Student.arr_userStudent.add(new Student.UserStudent(nameField.getText(), nimField.getText(), fakultasField.getText(), jurusanField.getText()));
+                Student.arr_userStudent.add(new Student.UserStudent(nameField.getText(), nimField.getText(), fakultasField.getText(), jurusanField.getText(), emailField.getText(), picField.getText()));
+                Database.student_addStudent(nimField.getText(), picField.getText(), nameField.getText(), fakultasField.getText(), jurusanField.getText(), emailField.getText());
+
                 adminObj.menu();
                 addStudentStage.close();
 
@@ -259,14 +264,10 @@ public class Admin extends User implements iMenu {
         sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
 
 
-            // Buat ListView untuk menampilkan data mahasiswa
-            ListView<String> listView = new ListView<>();
+        // Buat ListView untuk menampilkan data mahasiswa
+        ListView<String> listView = new ListView<>();
+        Database.admin_displayStudent(listView);
 
-
-            Database.displayMahasiswa(listView);
-
-            // Lakukan sesuatu dengan listView, misalnya menampilkannya di GUI atau melakukan operasi lain
-            // Misalnya, Anda bisa mencetak isi listView ke konsol untuk debug
         for (String item : listView.getItems()) {
             System.out.println(item);
         }

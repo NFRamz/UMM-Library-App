@@ -10,7 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         LoginMenu loginMenuObj = new LoginMenu();
 
-        loginMenuObj.menuGUI();
+        loginMenuObj.menu();
     }
 
     public static void main(String[] args) {

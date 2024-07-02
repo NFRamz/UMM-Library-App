@@ -1,25 +1,26 @@
 package books;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 public class Book {
 
     //==================================== ATRIBUT ====================================
+    private String nim;
     private String bookId;
     private String title;
     private String author;
     private String category;
     private int stock;
     private int duration;
-    private Objects database;
+    private LocalDate expired_borrowedBook;
 
     //ArrayList untuk menyimpan list buku yang terdaftar.
     public static ArrayList<Book> arr_bookList = new ArrayList<>();
 
     //ArrayList untuk menyimpan list buku yang sedang dipinjam mahasiswa.
     public static ArrayList<Book> arr_borrowedBook = new ArrayList<>();
-
 
     //====================================== METHOD ======================================
 
@@ -31,12 +32,7 @@ public class Book {
     public Book(String category){
         this.category = category;
     }
-    public Book(String bookId, int stock, int duration){
-        this.bookId   = bookId;
-        this.stock    = stock;
-        this.duration = duration;
 
-    }
     public Book(String bookId, String title, String author,String category, int stock){
         this.bookId   = bookId;
         this.title    = title;
@@ -45,18 +41,35 @@ public class Book {
         this.stock    = stock;
 
     }
-    public Book(String bookId, String title, String author,String category, int stock, int duration){
-        this.bookId   = bookId;
-        this.title    = title;
-        this.author   = author;
-        this.category = category;
-        this.stock    = stock;
-        this.duration = duration;
 
+
+    //new for database
+    public Book(String nim, String bookId, String title, String author, String category, int duration) {
+        this.nim = nim;
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.duration = duration;
+        this.expired_borrowedBook = LocalDate.now().plusDays(duration);
+    }
+
+    public Book(String nim, String bookId, String title, String author, String category, int duration, LocalDate expired_borrowedBook) {
+        this.nim = nim;
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.duration = duration;
+        this.expired_borrowedBook = LocalDate.now().plusDays(duration);
     }
 
 
     //=================================== SETTER METHOD ====================================
+    public void setNim(String nim){
+        this.nim = nim;
+    }
+
     public void setBookId(String bookId){
         this.bookId     = bookId;
     }
@@ -79,7 +92,12 @@ public class Book {
     }
 
 
+
+
     //=================================== GETTER METHOD ==================================
+    public String getNim(){
+        return nim;
+    }
     public String getBookId(){
         return bookId;
     }
@@ -98,6 +116,8 @@ public class Book {
     public int getDuration(){
         return duration;
     }
-
+    public LocalDate getExpired_borrowedBook() {
+        return expired_borrowedBook;
+    }
 
 }

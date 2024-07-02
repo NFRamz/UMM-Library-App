@@ -2,6 +2,7 @@ package data;
 
 
 import Features.Database;
+import Features.DoubleClick_table;
 import books.Book;
 
 import Main.Main;
@@ -17,49 +18,61 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Student extends User implements iMenu {
+
     public static ArrayList<UserStudent> arr_userStudent = new ArrayList<>();
+
     public static String[] userInfo;
 
-    //Konstruktor untuk arraylist arr_userStudent.
     public static class UserStudent {
-        String nama, nim, fakultas, prodi;
+        String nama, nim, fakultas, prodi, email, pic;
 
-        public UserStudent(String nama, String nim, String fakultas, String prodi) {
+        public UserStudent(String nama, String nim, String fakultas, String prodi, String email, String pic ) {
             this.nama       = nama;
             this.nim        = nim;
             this.fakultas   = fakultas;
             this.prodi      = prodi;
-
+            this.email      = email;
+            this.pic        = pic;
         }
     }
 
     @Override
     public void menu() {
-
-        Stage studentMenuStage = new Stage();
-        studentMenuStage.setTitle("UMM Library - Student Menu");
-
         //Label
         Label sceneTitle = new Label("Student Menu");
+        sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
+        sceneTitle.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
 
-        String nama = Database.getNamaByNIM(LoginMenu.usernameField.getText());
+        String nama = Database.student_getNamaByNIM(LoginMenu.usernameField.getText());
         userInfo = new String[]{nama};
         Label nameLabel  = new Label("Halo, "+userInfo[0]);
-
-        //Font style
-        sceneTitle.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        nameLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
-        //Font color
-        sceneTitle.setStyle("-fx-text-fill: #A91D3A;");
         nameLabel.setStyle("-fx-text-fill: white;");
+        nameLabel.setTranslateX(510);
+        nameLabel.setTranslateY(-345);
+        nameLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
+
+
 
         //Button
         Button borrowBookButton = new Button("Pinjam Buku");
+        borrowBookButton.setTranslateX(-83);
+        borrowBookButton.setTranslateY(-65);
+        borrowBookButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
+
         Button returnBookButton = new Button("Kembalikan Buku");
+        returnBookButton.setTranslateX(-83);
+        returnBookButton.setTranslateY(115);
+        returnBookButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
+
         Button logoutButton = new Button("Logout");
+        logoutButton.setTranslateX(-83);
+        logoutButton.setTranslateY(293);
+        logoutButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
 
         //Image
         Image backgroundStudentMenu = new Image("file:src/main/java/image/studentMenu.png");
@@ -68,7 +81,10 @@ public class Student extends User implements iMenu {
 
         //Table
         TableView<Book> table = new TableView<>();
+        table.setTranslateX(-176);
+        table.setTranslateY(70);
         table.setPrefSize(400, 500);
+        table.getStylesheets().add("file:src/main/java/css/table.css");
 
         TableColumn<Book, String> idColumn = new TableColumn<>("ID Buku");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("bookId"));
@@ -92,19 +108,9 @@ public class Student extends User implements iMenu {
         table.getColumns().add(durationColumn);
 
         for (Book i : Book.arr_borrowedBook) {
-            for (Book j : Book.arr_bookList) {
-                if (i.getBookId().equals(j.getBookId())) {
-                    j.setDuration(i.getDuration());
-                    table.getItems().add(j);
-                }
-            }
+                    table.getItems().add(i);
         }
 
-        //CSS
-        table.getStylesheets().add("file:src/main/java/css/table.css");
-        borrowBookButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
-        returnBookButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
-        logoutButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
 
         //Grid layout
         GridPane gridButton = new GridPane();
@@ -123,36 +129,29 @@ public class Student extends User implements iMenu {
 
         gridTable.add(table, 0, 0);
 
-        //Position
-        nameLabel.setTranslateX(510);
-        nameLabel.setTranslateY(-345);
-
-        borrowBookButton.setTranslateX(-83);
-        borrowBookButton.setTranslateY(-65);
-
-        returnBookButton.setTranslateX(-83);
-        returnBookButton.setTranslateY(115);
-
-        logoutButton.setTranslateX(-83);
-        logoutButton.setTranslateY(293);
-
-        table.setTranslateX(-176);
-        table.setTranslateY(70);
 
         //StackPane
         StackPane stackPaneStudentMenu = new StackPane(backgroundStudentMenu_view, gridTable, gridButton, nameLabel);
+
+
+        //Scene
         Scene studentmenuScene = new Scene(stackPaneStudentMenu);
 
+
+        //Stage
+        Stage studentMenuStage = new Stage();
+        studentMenuStage.setScene(studentmenuScene);
+        studentMenuStage.setTitle("UMM Library - Student Menu");
         studentMenuStage.setFullScreen(true);
         studentMenuStage.setFullScreenExitHint("");
-        studentMenuStage.setScene(studentmenuScene);
+
         studentMenuStage.show();
 
         //hover button
         borrowBookButton.setOnMouseEntered(event -> {
-            Image borrow = new Image("file:src/main/java/image/2.png");
-            ImageView view = new ImageView(borrow);
-            stackPaneStudentMenu.getChildren().set(0, view);
+            Image borrowBook_background = new Image("file:src/main/java/image/borrowBook.png");
+            ImageView imageView = new ImageView(borrowBook_background);
+            stackPaneStudentMenu.getChildren().set(0, imageView);
         });
         borrowBookButton.setOnMouseExited(event -> {
             ImageView view = new ImageView(backgroundStudentMenu);
@@ -160,31 +159,23 @@ public class Student extends User implements iMenu {
         });
 
         returnBookButton.setOnMouseEntered(event -> {
-
-            Image borrow = new Image("file:src/main/java/image/4.png");
+            Image borrow = new Image("file:src/main/java/image/returnBook.png");
             ImageView view = new ImageView(borrow);
             stackPaneStudentMenu.getChildren().set(0, view);
-
         });
         returnBookButton.setOnMouseExited(event -> {
-
             ImageView view = new ImageView(backgroundStudentMenu);
             stackPaneStudentMenu.getChildren().set(0, view);
-
         });
 
         logoutButton.setOnMouseEntered(event -> {
-
-            Image borrow = new Image("file:src/main/java/image/3.png");
+            Image borrow = new Image("file:src/main/java/image/logout.png");
             ImageView view = new ImageView(borrow);
             stackPaneStudentMenu.getChildren().set(0, view);
-
-        });
+        }); 
         logoutButton.setOnMouseExited(event -> {
-
             ImageView view = new ImageView(backgroundStudentMenu);
             stackPaneStudentMenu.getChildren().set(0, view);
-
         });
 
         //Action button
@@ -198,11 +189,25 @@ public class Student extends User implements iMenu {
             studentMenuStage.close();
         });
 
+
         logoutButton.setOnAction(event -> {
+            String nim = LoginMenu.usernameField.getText();
+
+            try {
+                Database.book_saveOrDeleteBorrowedBooks(LoginMenu.usernameField.getText());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            Database.book_updateBookStock();
+            Book.arr_borrowedBook.clear();
+            Book.arr_bookList.clear();
+
             Main mainobj = new Main();
             mainobj.start(new Stage());
             studentMenuStage.close();
         });
+
+
 
     }
 
@@ -255,7 +260,6 @@ public class Student extends User implements iMenu {
         TableColumn<Book, String> categoryBookColumn = new TableColumn<>("Kategori");
         TableColumn<Book, String> durationBookColumn = new TableColumn<>("Durasi Pinjaman (Hari)");
 
-        //Table fill
         idBookColumn.setCellValueFactory(new PropertyValueFactory<>("bookId"));
         titleBookColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorBookColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
@@ -313,6 +317,9 @@ public class Student extends User implements iMenu {
         returnBooksStage.show();
 
         //Action button
+        //new
+        DoubleClick_table.setupDragAndDrop(idBookColumn, bookIdField);
+
         submitButton.setOnAction(event -> {
 
             boolean validasiReturnBooks = false;
@@ -342,6 +349,7 @@ public class Student extends User implements iMenu {
                 submitFailedLabel.setVisible(false);
 
             } else {
+
                 submitFailedLabel.setVisible(true);
                 submitSuccesLabel.setVisible(false);
             }
@@ -356,4 +364,5 @@ public class Student extends User implements iMenu {
         });
 
     }
+
 }
