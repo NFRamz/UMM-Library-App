@@ -145,7 +145,8 @@ public class Database {
     }
 
     public static void student_saveBorrowedBooks(String nim) {
-        String sql = "INSERT REPLACE INTO borrowed_books (nim, book_id, title, author, category, duration, expired_borrowedBook) VALUES (?, ?, ?, ?, ?, ?,?)";
+        String sql = "INSERT OR REPLACE INTO borrowed_books (nim, book_id, title, author, category, duration, expired_borrowedBook) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         try (Connection conn = connect(book_database);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -255,7 +256,6 @@ public class Database {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            // Iterasi hasil query dan tampilkan informasi buku
             while (rs.next()) {
                 String id = rs.getString("id");
                 String title = rs.getString("title");
@@ -301,7 +301,7 @@ public class Database {
             student_saveBorrowedBooks(nim);
         }
 
-        Connection conn = connect(book_database);
+        Connection connection = connect(book_database);
         String deleteSql = "DELETE FROM borrowed_books WHERE nim = ? AND book_id NOT IN (";
         StringBuilder add = new StringBuilder();
         for (int i = 0; i < Book.arr_borrowedBook.size(); i++) {
@@ -312,14 +312,13 @@ public class Database {
         }
         deleteSql += add + ")";
 
-        PreparedStatement deleteStmt = conn.prepareStatement(deleteSql);
+        PreparedStatement deleteStmt = connection.prepareStatement(deleteSql);
         deleteStmt.setString(1, nim);
         for (int i = 0; i < Book.arr_borrowedBook.size(); i++) {
             deleteStmt.setString(2 + i, Book.arr_borrowedBook.get(i).getBookId());
         }
 
-        int rowsDeleted = deleteStmt.executeUpdate();
-        System.out.println(rowsDeleted + " row(s) deleted for NIM: " + nim);
+        int deleteBaris = deleteStmt.executeUpdate();
     }
 
 
@@ -360,13 +359,14 @@ public class Database {
                 LocalDate expiredDate = LocalDate.parse(rs.getString("expired_borrowedBook"), formatTime);
                 long daysLate = java.time.temporal.ChronoUnit.DAYS.between(expiredDate, currentDate);
 
-                if (!expiredDate.isAfter(currentDate)) {
-                    long denda = daysLate * 500000;
+
+                if (currentDate.isAfter(expiredDate)) {
+                    long denda = daysLate * 500;
 
                     emailBody.append("ID Buku: ").append(bookId).append("\n")
                             .append("Nama Buku: ").append(title).append("\n")
                             .append("Keterlambatan: ").append(daysLate).append(" hari\n")
-                            .append("Biaya denda /perhari: Rp. 500.000\n\n");
+                            .append("Biaya denda /perhari: Rp. 500\n\n");
 
                     totalDenda += denda;
                 }
@@ -391,13 +391,13 @@ public class Database {
                 SendEmail sendEmail = new SendEmail();
                 sendEmail.sendEmail(recipientEmail, subject, body);
 
-                System.out.println("Email sent successfully for overdue books.");
+                System.out.println("Email terkirim");
             } else {
-                System.out.println("Recipient email address not found for NIM " + nim);
+                System.out.println("Email pada nim tidak ada " + nim);
             }
 
         } catch (SQLException e) {
-            System.out.println("Failed to send overdue email for NIM " + nim + ": " + e.getMessage());
+            System.out.println("Error Database Method = book_expiredDateBorrowedBook");
         }
     }
 }

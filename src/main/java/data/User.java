@@ -439,7 +439,7 @@ public class User {
 
                 adminObj.menu();
                 addbookStage.close();
-            }catch (NumberFormatException message){
+            }catch (Exception e){
                 errorMessageLabel.setVisible(true);
                 addbookStage.show();
             }

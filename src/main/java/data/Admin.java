@@ -268,8 +268,8 @@ public class Admin extends User implements iMenu {
         ListView<String> listView = new ListView<>();
         Database.admin_displayStudent(listView);
 
-        for (String item : listView.getItems()) {
-            System.out.println(item);
+        for (String i : listView.getItems()) {
+            System.out.println(i);
         }
         //Grid Layout
         GridPane grid = new GridPane();

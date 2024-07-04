@@ -3,7 +3,6 @@ package data;
 import Features.Database;
 import util.iMenu;
 import exception.custom.IllegalAdminAccess;
-import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -31,11 +30,10 @@ public class LoginMenu implements iMenu{
     public void menu(){
         Admin adminObj = new Admin();
         Student studentObj = new Student();
-        Stage primaryStage = new Stage();
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LABEL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        //Label
+
         Label usernameLabel = new Label("Username");
         usernameLabel.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
         usernameLabel.setTranslateY(58);
@@ -51,7 +49,7 @@ public class LoginMenu implements iMenu{
         errorLoginMessage.setTranslateY(48);
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FIELD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        //Field
+
         usernameField.setPromptText("Masukkan NIM (15 Digit!)");
         usernameField.setTranslateY(58);
 
@@ -61,7 +59,7 @@ public class LoginMenu implements iMenu{
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> BUTTON <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        //Button
+
         Button loginButton = new Button("Login");
         loginButton.getStylesheets().add("file:src/main/java/css/Login_button.css");
         loginButton.setFont(Font.font("Calibri Body", FontWeight.BOLD,10));
@@ -97,14 +95,13 @@ public class LoginMenu implements iMenu{
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SHAPE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        //Shape
+
         Rectangle rectangle = new Rectangle(300, 380);
         rectangle.setFill(Color.WHITE);
         rectangle.setArcWidth(50);
         rectangle.setArcHeight(50);
         rectangle.setTranslateX(0);
         rectangle.setTranslateY(20);
-
 
         Rectangle errorBackground = new Rectangle(300,70);
         errorBackground.setArcWidth(50);
@@ -113,6 +110,7 @@ public class LoginMenu implements iMenu{
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Group Element <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
         Group errorElementGroup = new Group();
         errorElementGroup.getChildren().add(errorBackground);
         errorElementGroup.getChildren().add(errorLoginMessage);
@@ -120,6 +118,7 @@ public class LoginMenu implements iMenu{
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Grid Settings <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
 
@@ -139,30 +138,27 @@ public class LoginMenu implements iMenu{
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Animation Settings <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), errorElementGroup);
-        translateTransition.setFromY(170);
-        translateTransition.setToY(200);
-        translateTransition.setAutoReverse(true);
+        TranslateTransition anim_errorElemenGroup = new TranslateTransition(Duration.seconds(0.5), errorElementGroup);
+        anim_errorElemenGroup.setFromY(170);
+        anim_errorElemenGroup.setToY(200);
 
 
-        //Overwrite element
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Window Settings <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
         StackPane stackPane = new StackPane();
         stackPane.getChildren().addAll(backgroundImageView,errorElementGroup,rectangle,grid,logoImageView,logoNameImageView,closeButton);
 
         Scene scene = new Scene(stackPane);
 
+        Stage primaryStage = new Stage();
         primaryStage.setTitle("UMM Library");
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
         primaryStage.show();
 
-        //Action Button
-        PauseTransition delay = new PauseTransition(Duration.seconds(3));
-        delay.setOnFinished(event1 -> {
-            PauseTransition delay1 = new PauseTransition(Duration.seconds(2));
-            delay1.setOnFinished(event2 -> errorElementGroup.setVisible(false));
-        });
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Action Button <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
         closeButton.setOnAction(event -> primaryStage.close());
 
@@ -179,37 +175,37 @@ public class LoginMenu implements iMenu{
             } else {
                 try {
                     if (username.length() == 15 && Database.student_loginChecker(username, password)) {
-                        if (Database.book_expiredDateBorrowedBook(nim)) {
-
-                            Database.book_expiredBorrowedBookSendEmail(usernameField.getText());
-                            errorLoginMessage.setText("Akun telah ditangguhkan !");
-                            errorElementGroup.setVisible(true);
-                            translateTransition.play();
-                            Sound.falseLogin();
-                            delay.play();
-
-                        } else {
-
+                        if (!Database.book_expiredDateBorrowedBook(nim)) {
                             Database.book_bookDisplay();
                             Database.student_displayBorrowedBooks(usernameField.getText());
                             studentObj.menu();
                             primaryStage.close();
 
+                        } else {
+                            Database.book_expiredBorrowedBookSendEmail(usernameField.getText());
+                            errorLoginMessage.setText("Akun telah ditangguhkan!");
+
+                            Sound.falseLogin();
+                            errorElementGroup.setVisible(true);
+                            anim_errorElemenGroup.play();
+
                         }
                     } else {
-                        delay.play();
+
                         Sound.falseLogin();
                         errorElementGroup.setVisible(true);
-                        translateTransition.play();
+                        anim_errorElemenGroup.play();
                     }
                 } catch (IllegalAdminAccess message) {
                     errorLoginMessage.setText(message.getMessage());
                     errorElementGroup.setVisible(true);
-                    delay.play();
+
                     Sound.falseLogin();
-                    translateTransition.play();
+                    anim_errorElemenGroup.play();
+
                 }
             }
+
         });
 
     }

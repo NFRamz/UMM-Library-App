@@ -331,11 +331,11 @@ public class Student extends User implements iMenu {
                     for (Book book : Book.arr_bookList) {
                         if (book.getBookId().equals(bookIdField.getText())) {
 
-                            int returnBook = book.getStock();   //variabel returnBook yang berfungsi untuk mendapatkan info jumlah stok buku dari variabel book.
-                            returnBook++;                       //lalu setelah itu menambahkan nilai +1 pada variabel returnBook.
-                            book.setStock(returnBook);          //Lalu, menambahkan nilai returnBook kedalam stok buku yang ada di arraylist arr_bookList.
+                            int returnBook = book.getStock();
+                            returnBook++;
+                            book.setStock(returnBook);
 
-                            Book.arr_borrowedBook.remove(i);    //Menghapus buku dari arraylist arr_borrowedBook.
+                            Book.arr_borrowedBook.remove(i);
 
                             validasiReturnBooks = true;
 
