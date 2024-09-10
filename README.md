@@ -6,7 +6,9 @@
   <a href="https://github.com/NFRamz"><img src="https://readme-typing-svg.herokuapp.com?lines=Universitas+Muhammadiyah+Malang;Fakultas+Teknik;Informatika;Pemograman+Berorientasi+Objek;Semester+2;&center=true&width=500&height=50"></a>
 </p>
 <br>
-<b>(❁ FOR TRIAL TEST</b><br>
+<b>❁ FOR TRIAL TEST</b>
+<br>
+<br>
   ● Admin Access:<br>
     - Username = <b>admin</b><br>
     - PIC      = <b>admin123</b>
