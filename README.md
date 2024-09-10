@@ -6,14 +6,20 @@
   <a href="https://github.com/NFRamz"><img src="https://readme-typing-svg.herokuapp.com?lines=Universitas+Muhammadiyah+Malang;Fakultas+Teknik;Informatika;Pemograman+Berorientasi+Objek;Semester+2;&center=true&width=500&height=50"></a>
 </p>
 <br>
-  ● Admin Access:
+  ● Admin Access:<br>
     - Username = <b>admin</b><br>
     - PIC      = <b>admin123</b>
     
-  ● Student Access:
+  ● Student Access:<br>
     - Username = <b>123456789101112</b><br>
-    - PIC      = <b>123</b>
-  
+    - PIC      = <b>123</b><br>
+    <br>
+    <b>Note:</b> To enable the email function, please fill in <b>EMAIL_USERNAME</b> and <b>EMAIL_PASSWORD</b> in the <b>.env</b> file with your Google email address and the app password you have created.
+    <br>
+    <br>
+    <b>●Links:</b>
+   <a href="https://support.google.com/accounts/answer/185833?hl=id" style="color: #ADD8E6; font-weight: bold;">How to create an app password on a Google account</a>
+
 <br>
   <p align="center">
   <a href="https://github.com/NFRamz">
