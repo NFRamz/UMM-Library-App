@@ -37,4 +37,15 @@ Preview:
 <p align="center">
   <img src="https://github.com/NFRamz/UMM-Library-App/blob/main/preview/Login%20menu.png" alt="Login Menu Preview">
 </p>
+  
+  ● Student Menu:
+<p align="center">
+  <img src="https://github.com/NFRamz/UMM-Library-App/blob/main/preview/Student%20Page.png" alt="Student Menu Preview">
+</p>
+  
+  ● Admin Menu:
+<p align="center">
+  <img src="https://github.com/NFRamz/UMM-Library-App/blob/main/preview/Admin%20Menu.png" alt="Admin Menu Preview">
+  <img src="https://github.com/NFRamz/UMM-Library-App/blob/main/preview/Admin%20Page_addStudednt.png" alt="Admin Page_addStudent Preview">
+</p>
 Last Edited on: 16/06/2024
