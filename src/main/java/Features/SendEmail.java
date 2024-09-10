@@ -1,6 +1,8 @@
 package Features;
 
 
+import commands.ENV;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
@@ -12,8 +14,8 @@ import javax.mail.internet.MimeMessage;
 public class SendEmail {
 
     public void sendEmail(String recipientEmail, String subject, String body) {
-        final String username = "umm.library.app@gmail.com";
-        final String password ="arrejqjzczfxspsh";
+        final String username = ENV.get("EMAIL_USERNAME");
+        final String password = ENV.get("EMAIL_PASSWORD");
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
