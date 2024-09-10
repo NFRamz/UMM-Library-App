@@ -15,8 +15,7 @@
     - Username = <b>123456789101112</b><br>
     - PIC      = <b>123</b><br>
     <br>
-    <b>● Activation Email function:</b><br>
-    EMAIL_USERNAME = 
+    <br>
     <b>Note:</b> To enable the email function, please fill in <b>EMAIL_USERNAME</b> and <b>EMAIL_PASSWORD</b> in the <b>.env</b> file with your Google email address and the app password you have created.
     <br>
     <br>
