@@ -7,11 +7,11 @@
 </p>
 <br>
   ● Admin Access:
-    - Username = <b>admin</b>
+    - Username = <b>admin</b><br>
     - PIC      = <b>admin123</b>
     
   ● Student Access:
-    - Username = <b>123456789101112</b>
+    - Username = <b>123456789101112</b><br>
     - PIC      = <b>123</b>
   
 <br>
