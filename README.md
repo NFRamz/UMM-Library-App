@@ -6,7 +6,14 @@
   <a href="https://github.com/NFRamz"><img src="https://readme-typing-svg.herokuapp.com?lines=Universitas+Muhammadiyah+Malang;Fakultas+Teknik;Informatika;Pemograman+Berorientasi+Objek;Semester+2;&center=true&width=500&height=50"></a>
 </p>
 <br>
-
+  ● Admin Access:
+    - Username = <b>admin</b>
+    - PIC      = <b>admin123</b>
+    
+  ● Student Access:
+    - Username = <b>123456789101112</b>
+    - PIC      = <b>123</b>
+  
 <br>
   <p align="center">
   <a href="https://github.com/NFRamz">
