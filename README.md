@@ -9,11 +9,11 @@
 <b>❁ FOR TRIAL TEST</b>
 <br>
 <br>
-  ● Admin Access:<br>
+  <b>● Admin Access:</b><br>
     - Username = <b>admin</b><br>
-    - PIC      = <b>admin123</b>
+    - PIC      = <b>admin123</b><br>
     <br>
-  ● Student Access:<br>
+  <b>● Student Access:</b><br>
     - Username = <b>123456789101112</b><br>
     - PIC      = <b>123</b><br>
     <br>
