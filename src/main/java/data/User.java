@@ -1,118 +1,57 @@
 package data;
 
-import Features.Database;
-import Features.DoubleClick_table;
-
 import books.*;
-import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
-import Features.SendEmail;
 
-import java.sql.SQLException;
+import javafx.stage.Stage;
 
 
 public class User {
 
-//====================================== METHOD =======================================
+    //===================================== ATRIBUT ======================================
+
+
+
+
+
+    //====================================== METHOD =======================================
 
     //Method yang digunakan untuk meminjam buku
     public void choiceBooks() {
+
+
         Book bookObj = new Book();
         Student studentObj = new Student();
 
+        Stage choiceBooksStage = new Stage();
+        choiceBooksStage.setTitle("UMM library - Pilih Buku");
 
-        //Label
-        Label headerTitle = new Label("PINJAM BUKU");
-        headerTitle.setTranslateX(131);
-        headerTitle.setStyle("-fx-text-fill: #A91D3A;");
-        headerTitle.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
 
-        Label bookIdLabel = new Label("Input ID buku yang ingin dipinjam:");
 
-        Label durationLabel = new Label("Berapa hari ingin meminjam buku?");
-
-        //Label notification
-        Label errorMaxBorrowedLabel = new Label("Batas pinjam 10 buku");
-        errorMaxBorrowedLabel.setVisible(false);
-        errorMaxBorrowedLabel.setTranslateX(120);
-        errorMaxBorrowedLabel.setStyle("-fx-text-fill: #FF1E1E;");
-        errorMaxBorrowedLabel.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        Label errorDuplicateLabel = new Label("Buku sudah dipinjam.");
-        errorDuplicateLabel.setVisible(false);
-        errorDuplicateLabel.setTranslateX(120);
-        errorDuplicateLabel.setStyle("-fx-text-fill: #A91D3A;");
-        errorDuplicateLabel.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        Label errorborrowBookLabel = new Label("Max 7 hari");
-        errorborrowBookLabel.setVisible(false);
-        errorborrowBookLabel.setTranslateX(151);
-        errorborrowBookLabel.setStyle("-fx-text-fill: #FF1E1E;");
-        errorborrowBookLabel.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        Label borrowBookSuccesLabel = new Label("Buku berhasil dipinjam");
-        borrowBookSuccesLabel.setVisible(false);
-        borrowBookSuccesLabel.setTranslateX(120);
-        borrowBookSuccesLabel.setStyle("-fx-text-fill: #1A4D2E;");
-        borrowBookSuccesLabel.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        Label idNotFoundLabel = new Label("ID buku tidak ditemukan");
-        idNotFoundLabel.setVisible(false);
-        idNotFoundLabel.setStyle("-fx-text-fill: #b11010;");
-        idNotFoundLabel.setTranslateX(120);
-        idNotFoundLabel.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        Label errorDurationField = new Label("Durasi tidak boleh kosong");
-        errorDurationField.setVisible(false);
-        errorDurationField.setStyle("-fx-text-fill: #b11010;");
-        errorDurationField.setTranslateX(120);
-        errorDurationField.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        Label sendEmailError = new Label("Tidak ada jaringan");
-        sendEmailError.setVisible(false);
-        sendEmailError.setTranslateX(120);
-        sendEmailError.setStyle("-fx-text-fill: #b11010;");
-        sendEmailError.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        Label waitLabel = new Label("Mohon tunggu");
-        waitLabel.setVisible(false);
-        waitLabel.setTranslateX(140);
-        waitLabel.setStyle("-fx-text-fill: #ae7805;");
-        waitLabel.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        Label bookStockEmptyLabel = new Label("Stok buku habis");
-        bookStockEmptyLabel.setVisible(false);
-        bookStockEmptyLabel.setTranslateX(135);
-        bookStockEmptyLabel.setStyle("-fx-text-fill: #FF1E1E;");
-        bookStockEmptyLabel.setFont(Font.font("Calibri Body", FontWeight.BOLD, 15));
-
-        //Field
-        TextField bookIdField = new TextField();
-
-        TextField durationField = new TextField();
-        durationField.setPromptText("Maks. 7 hari");
-
-        //Button
-        Button submitButton = new Button("Submit");
-        submitButton.setTranslateX(348);
-
-        Button returnButton = new Button("Kembali");
-
-        //Table
         TableView<Book> tableView = new TableView<>();
 
-        TableColumn<Book, String> idColumn       = new TableColumn<>("ID Buku");
-        TableColumn<Book, String> titleColumn    = new TableColumn<>("Nama Buku");
-        TableColumn<Book, String> authorColumn   = new TableColumn<>("Penulis");
+        TableColumn<Book, String> idColumn = new TableColumn<>("ID Buku");
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+
+        TableColumn<Book, String> titleColumn = new TableColumn<>("Nama Buku");
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+        TableColumn<Book, String> authorColumn = new TableColumn<>("Penulis");
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+
         TableColumn<Book, String> categoryColumn = new TableColumn<>("Kategori");
-        TableColumn<Book, Integer> stockColumn   = new TableColumn<>("Stok");
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+
+        TableColumn<Book, Integer> stockColumn = new TableColumn<>("Stok");
+        stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
         tableView.getColumns().add(idColumn);
         tableView.getColumns().add(titleColumn);
@@ -120,174 +59,78 @@ public class User {
         tableView.getColumns().add(categoryColumn);
         tableView.getColumns().add(stockColumn);
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookId"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
-
         for (Book i : Book.arr_bookList) {
             tableView.getItems().add(i);
         }
 
 
-        //Grid layout
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
 
-        grid.add(headerTitle,0,0);
-        grid.add(tableView,0,1);
-
-        grid.add(bookIdLabel,  0, 2);
-        grid.add(bookIdField, 0, 3);
-
-        grid.add(durationLabel,0,4);
-
-        grid.add(durationField, 0,5);
-
-        grid.add(submitButton,0,6);
-        grid.add(returnButton,0,6);
-
-        grid.add(errorDurationField,0,6);
-        grid.add(errorDuplicateLabel,0,6);
-        grid.add(errorborrowBookLabel,0,6);
-        grid.add(borrowBookSuccesLabel,0,6);
-        grid.add(bookStockEmptyLabel, 0,6);
-        grid.add(idNotFoundLabel,0,6);
-        grid.add(sendEmailError,0,6);
-        grid.add(errorMaxBorrowedLabel,0,6);
-        grid.add(waitLabel,0,6);
-
-        grid.setHgap(5);
+        grid.setHgap(10);
         grid.setVgap(10);
 
+        grid.setPadding(new Insets(25, 25, 25, 25));
 
-        //Scene
-        Scene scene = new Scene(grid);
+        grid.add(tableView,0,0);
 
-        //Stage
-        Stage choiceBooksStage = new Stage();
+        Label bookIdLabel = new Label("Input ID buku yang ingin dipinjam:");
+        grid.add(bookIdLabel,  0, 1);
 
+        TextField bookIdField = new TextField();
+        grid.add(bookIdField, 0, 2);
+
+        Label durationLabel = new Label("Berapa hari ingin meminjam buku? (Max 14 hari)");
+
+        TextField durationField = new TextField();
+        durationField.setPromptText("Berapa hari ?");
+
+        grid.add(durationLabel,0,3);
+        grid.add(durationField, 0,4);
+        Button submitButton = new Button("Submit");
+        grid.add(submitButton,0,5);
+        Label messageLabel = new Label();
+
+        Scene scene = new Scene(grid, 500, 275);
         choiceBooksStage.setScene(scene);
-
-        choiceBooksStage.setTitle("UMM library - Pilih Buku");
-        choiceBooksStage.setFullScreen(true);
-        choiceBooksStage.setFullScreenExitHint("");
-
         choiceBooksStage.show();
 
+        submitButton.setOnAction(e -> {
+            boolean validasi = false;
 
-        //Features
-        DoubleClick_table.setupDragAndDrop(idColumn, bookIdField);
+            String idBukuYangDipinjam = bookIdField.getText();
 
-
-        //Action button
-        submitButton.setOnAction(event -> {
-
-            errorDurationField.setVisible(false);
-            errorMaxBorrowedLabel.setVisible(false);
-            sendEmailError.setVisible(false);
-            errorborrowBookLabel.setVisible(false);
-            borrowBookSuccesLabel.setVisible(false);
-            bookStockEmptyLabel.setVisible(false);
-            idNotFoundLabel.setVisible(false);
-            errorDuplicateLabel.setVisible(false);
-            waitLabel.setVisible(false);
-
-            if (Book.arr_borrowedBook.size() >= 10) {
-                errorMaxBorrowedLabel.setVisible(true);
-                return;
-            }
-
-            for (Book i : Book.arr_borrowedBook) {
-                if (bookIdField.getText().equals(i.getBookId())) {
-                    errorDuplicateLabel.setVisible(true);
-                    return;
-                }
-            }
-
-            if (durationField.getText().isEmpty()) {
-                errorDurationField.setVisible(true);
-                return;
-            }
-
-            int inputWaktuPinjaman = Integer.parseInt(durationField.getText());
-            if (inputWaktuPinjaman <= 0 || inputWaktuPinjaman > 7) {
-                errorborrowBookLabel.setVisible(true);
-                return;
-            }
-
-            boolean bookFound = false;
             for (Book i : Book.arr_bookList) {
-                if (i.getBookId().equals(bookIdField.getText())) {
-                    bookFound = true;
-                    if (i.getStock() == 0) {
-                        bookStockEmptyLabel.setVisible(true);
-                        return;
+                if (i.getBookId().equals(idBukuYangDipinjam)) {
+                    if (i.getStock() > 0) {
+                        int a = i.getStock();
+                        a--;
+                        i.setStock(a);
+
+                        int inputwaktuPinjaman = Integer.parseInt(durationField.getText());
+
+                        if(inputwaktuPinjaman < 15) {
+                            bookObj.setDuration(inputwaktuPinjaman);
+                            Book.arr_borrowedBook.add(new Book(idBukuYangDipinjam, i.getStock(), bookObj.getDuration()));
+                            validasi = true;
+                            break;
+                        } else {
+                            messageLabel.setText("Max 14 hari");
+                        }
+                    } else if (i.getStock() == 0){
+                        messageLabel.setText("== Stok buku habis! ==");
+                        studentObj.menu();
                     }
-
-                    int stock = i.getStock();
-                    stock--;
-                    i.setStock(stock);
-                    i.setDuration(inputWaktuPinjaman);
-
-                    SendEmail sendEmail = new SendEmail();
-                    String nim = LoginMenu.usernameField.getText();
-                    String returnDate = Database.student_displayReturnTimeForBorrowedBook(inputWaktuPinjaman);
-
-                    try {
-                        String recipientEmail = Database.student_getEmailbyNIM(nim);
-
-                        String subject = "Peminjaman Buku Berhasil!";
-                        String body = "Terimakasih telah berkunjung ke perpustakaan pusat UMM.\n"
-                                + "Berikut lampiran tentang buku yang telah dipinjam :\n\n"
-                                + "Book ID    : " + i.getBookId() + "\n"
-                                + "Title      : " + i.getTitle() + "\n"
-                                + "Category   : " + i.getCategory() + "\n"
-                                + "Duration of borrowing : " + inputWaktuPinjaman + " days\n\n"
-                                + "Batas pengembalian   : " + returnDate + "\n\n"
-                                + sendEmail.dateinfo_now();
-
-                        waitLabel.setVisible(true);
-
-                        Platform.runLater(() -> {
-                            try {
-                                sendEmail.sendEmail(recipientEmail, subject, body);
-                                Book.arr_borrowedBook.add(new Book(nim, bookIdField.getText(), i.getTitle(), i.getAuthor(), i.getCategory(), i.getDuration()));
-
-                                tableView.refresh();
-
-                                borrowBookSuccesLabel.setVisible(true);
-                                waitLabel.setVisible(false);
-                            } catch (Exception e) {
-                                int returnStock = i.getStock();
-                                returnStock++;
-                                i.setStock(returnStock);
-
-                                sendEmailError.setVisible(true);
-                                waitLabel.setVisible(false);
-                            }
-                        });
-
-                    } catch (SQLException e) {
-                        System.out.println("Terjadi kesalahan saat mencari email untuk NIM " + nim + ": " + e.getMessage());
-                    }
-
-                    break;
                 }
             }
-
-            if (!bookFound) {
-                idNotFoundLabel.setVisible(true);
+            if(validasi){
+                messageLabel.setText("==== Buku berhasil dipinjam! ====");
+            } else {
+                messageLabel.setText("== ID tidak ditemukan! ==");
             }
 
-        });
 
-        returnButton.setOnAction(event -> {
-            studentObj.menu();
-            choiceBooksStage.close();
         });
-
     }
 
     public void inputBook() {
@@ -295,7 +138,8 @@ public class User {
         Book  storyBookObj   = new StoryBook();
         Book  historyBookObj = new HistoryBook();
 
-
+        Stage inputBookStage = new Stage();
+        inputBookStage.setTitle("UMM Library - Input Book");
 
         //Label
         Label sceneTitle = new Label("Tambah Buku");
@@ -326,14 +170,8 @@ public class User {
         grid.setVgap(10);
         grid.setHgap(5);
 
-        Scene scene = new Scene(grid);
-        Stage inputBookStage = new Stage();
-
-        inputBookStage.setTitle("UMM Library - Input Book");
+        Scene scene = new Scene(grid, 1360, 720);
         inputBookStage.setScene(scene);
-        inputBookStage.setFullScreen(true);
-        inputBookStage.setFullScreenExitHint("");
-
         inputBookStage.show();
 
 
@@ -362,27 +200,14 @@ public class User {
         addbookStage.setTitle(addBookStageTitle);
 
         //Label
-        Label sceneTitleLabel= new Label(addBookSceneTitle);
-        sceneTitleLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        sceneTitleLabel.setStyle("-fx-text-fill: #A91D3A;");
-
+        Label sceneTitleLabel    = new Label(addBookSceneTitle);
         Label bookIdLabel    = new Label("ID Buku    :");
-        bookIdLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
-
         Label bookTitleLabel = new Label("Judul Buku :");
-        bookTitleLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
-
         Label authorLabel    = new Label("Penulis    :");
-        authorLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
-
         Label stockLabel     = new Label("Stok       :");
-        stockLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
 
-        //Label notification
+        //Notification Label
         Label errorMessageLabel = new Label("Stok harus berupa angka");
-        errorMessageLabel.setVisible(false);
-        errorMessageLabel.setStyle("-fx-text-fill: #FF1E1E;");
-
 
         //Field
         TextField bookIdField    = new TextField(adminObj.generateId());
@@ -390,12 +215,22 @@ public class User {
         TextField authorField    = new TextField();
         TextField stockField     = new TextField();
 
+        //Font label style
+        sceneTitleLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        bookIdLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+        bookTitleLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+        authorLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+        stockLabel.setFont(Font.font("Calibri Body", FontWeight.NORMAL, 15));
+
+        //Font label color
+        sceneTitleLabel.setStyle("-fx-text-fill: #A91D3A;");
+        errorMessageLabel.setStyle("-fx-text-fill: #FF1E1E;");
+
+        //Font visible settings
+        errorMessageLabel.setVisible(false);
 
         //Button
         Button submitButton = new Button("Submit");
-
-        Button returnButton = new Button("Kembali");
-        returnButton.setTranslateX(-22);
 
         //Grid layout
         GridPane gridAddBook = new GridPane();
@@ -413,14 +248,10 @@ public class User {
         gridAddBook.add(authorField, 2,3);
         gridAddBook.add(stockField,2,4);
 
-        gridAddBook.add(submitButton,3,5);
-        gridAddBook.add(returnButton, 2,5);
+        gridAddBook.add(submitButton,2,5);
 
-
-        Scene addbookScene = new Scene(gridAddBook);
+        Scene addbookScene = new Scene(gridAddBook,1360,720);
         addbookStage.setScene(addbookScene);
-        addbookStage.setFullScreen(true);
-        addbookStage.setFullScreenExitHint("");
         addbookStage.show();
 
         //Action button
@@ -435,11 +266,11 @@ public class User {
                 bookObj.setAuthor(authorField.getText());
                 bookObj.setStock(Integer.parseInt(stockField.getText()));
 
-                Database.admin_addBook(bookObj.getBookId(), bookObj.getTitle(), bookObj.getAuthor(), genreBook.getCategory(), bookObj.getStock());
+                Book.arr_bookList.add(new Book(bookObj.getBookId(), bookObj.getTitle(), bookObj.getAuthor(), genreBook.getCategory(), bookObj.getStock()));
 
                 adminObj.menu();
                 addbookStage.close();
-            }catch (Exception e){
+            }catch (NumberFormatException message){
                 errorMessageLabel.setVisible(true);
                 addbookStage.show();
             }
