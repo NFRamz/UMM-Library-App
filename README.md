@@ -12,7 +12,9 @@
 - Klik 2x pada buku yang ingin dipinjam / dikembalikan.
 - Sistem perpanjang peminjaman buku.
 - Sistem denda pada Mahasiswa yang terlambat mengembalikan buku.
-- 
+
+<br>
+<br>
 
 ### <b>🪲 BUG Fixed in v2</b> ####
 - Aplikasi dapat berjalan lebih baik di resolusi layar yang berbeda-beda.
@@ -24,6 +26,8 @@
 - Perbaikan pada Menu Admin yang tidak dapat menambahkan data mahasiswa dan buku baru di beberapa situasi.
 - Perbaikan animasi dan suara pada notifikasi aplikasi.
 
+<br>
+<br>
 
 ### 📍 Cara Penggunaan ###
 ````
@@ -33,6 +37,10 @@
 ````
 <b>Note:</b>
 Secara Default, beberapa fitur seperti fungsi email dinonaktifkan, karena membutuhkan konfigurasi tambahan pada file <b>.env</b> yaitu <b>Alamat Email</b> dan <b>Password Aplikasi</b>. Namun, ini tidak akan mengganggu program saat berjalan.
+
+<br>
+<br>
+
 ### 🛠️ Cara Konfigurasi file .env ###
 ````
 1.Ubahlah isi 2 variabel ini sesuai dengan perintah yang ada.
@@ -50,6 +58,9 @@ EMAIL_PASSWORD=arrzcjks
 
 <b>> Links:</b>
 <a href="https://support.google.com/accounts/answer/185833?hl=id" style="color: #ADD8E6; font-weight: bold;">How to create an app password on a Google account</a>
+
+<br>
+<br>
 
 ### <b>🔧 FOR TRIAL TEST</b> ####
 
