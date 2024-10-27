@@ -1,28 +1,79 @@
-### <h1 align="center"> Hello Welcome to UMM Library Project :) </h1>
+### <h1 align="center"> Hello Welcome to UMM Library App v2 :) </h1>
 <p align="center">
 •●•
 <h1 align="center">I'm NF_Ramz <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="40"></h1>
 <p align="center"
   <a href="https://github.com/NFRamz"><img src="https://readme-typing-svg.herokuapp.com?lines=Universitas+Muhammadiyah+Malang;Fakultas+Teknik;Informatika;Pemograman+Berorientasi+Objek;Semester+2;&center=true&width=500&height=50"></a>
 </p>
+
+### <b>🌟 Features  </b> ####
+- Tampilan yang lebih menarik dan mudah digunakan.
+- Notifikasi email saat melakukan peminjaman / pengembalian buku.
+- Klik 2x pada buku yang ingin dipinjam / dikembalikan.
+- Sistem perpanjang peminjaman buku.
+- Sistem denda pada Mahasiswa yang terlambat mengembalikan buku.
+
 <br>
-<b>❁ FOR TRIAL TEST</b>
+<br>
+
+### <b>🪲 BUG Fixed in v2</b> ####
+- Aplikasi dapat menyesuaikan dan berjalan lebih baik di resolusi layar yang berbeda-beda.
+- Pengelolaan penggunaan RAM yang lebih ringan.
+- Notifikasi email dapat terkirim lebih cepat.
+- Buku yang telah dipinjam tidak tampil pada table Peminjaman Buku.
+- Perbaikan pada menu Pinjam Buku yang  Not Responding saat melakukan proses peminjaman.
+- Perbaikan logika pada database untuk mempercepat proses pada Menu Login, Pengembalian Buku, Tambah Mahasiswa, Tambah Buku.  
+- Perbaikan pada Menu Admin yang tidak dapat menambahkan data mahasiswa dan buku baru di beberapa situasi.
+- Perbaikan animasi dan suara pada notifikasi aplikasi.
+
 <br>
 <br>
-  <b>● Admin Access:</b><br>
+
+### 📍 Cara Penggunaan ###
+````
+1.Clone repository atau unduh langsung dalam bentuk .zip
+2.Buka project dalam IDE (Intellij IDEA, Netbeans, Eclipse, dll)
+3.Cari class Main.java, Lalu jalankan program melalui class tersebut.
+````
+<b>Note:</b>
+Secara Default, beberapa fitur seperti fungsi email dinonaktifkan, karena membutuhkan konfigurasi tambahan pada file <b>.env</b> yaitu <b>Alamat Email</b> dan <b>Password Aplikasi</b>. Namun, ini tidak akan mengganggu program saat berjalan.
+
+<br>
+<br>
+
+### 🛠️ Cara Konfigurasi file .env ###
+````
+1.Ubahlah isi 2 variabel ini sesuai dengan perintah yang ada.
+
+EMAIL_USERNAME=isi_alamat_email_anda
+EMAIL_PASSWORD=isi_password_aplikasi_anda
+
+Contoh:
+
+EMAIL_USERNAME=ummlibmail@gmail.com
+EMAIL_PASSWORD=arrzcjks
+````
+<b>Note:</b>
+<b>EMAIL_PASSWORD</b> yang dimaksud, bukan password email yang biasanya anda gunakan untuk login ke akun. Tetapi, password aplikasi baru yang dibuat khusus dari akun google anda.
+
+<b>> Links:</b>
+<a href="https://support.google.com/accounts/answer/185833?hl=id" style="color: #ADD8E6; font-weight: bold;">How to create an app password on a Google account</a>
+
+<br>
+<br>
+
+### <b>🔧 FOR TRIAL TEST</b> ####
+
+  <b>> Admin Access:</b><br>
     - Username = <b>admin</b><br>
     - PIC      = <b>admin123</b><br>
     <br>
-  <b>● Student Access:</b><br>
+  <b>> Student Access:</b><br>
     - Username = <b>123456789101112</b><br>
     - PIC      = <b>123</b><br>
-    <br>
-    <br>
-    <b>Note:</b> To enable the email function, please fill in <b>EMAIL_USERNAME</b> and <b>EMAIL_PASSWORD</b> in the <b>.env</b> file with your Google email address and the app password you have created.
-    <br>
-    <br>
-    <b>●Links:</b>
-   <a href="https://support.google.com/accounts/answer/185833?hl=id" style="color: #ADD8E6; font-weight: bold;">How to create an app password on a Google account</a>
+
+
+
 <br>
 <br>
   <p align="center">
