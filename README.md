@@ -17,7 +17,7 @@
 <br>
 
 ### <b>🪲 BUG Fixed in v2</b> ####
-- Aplikasi dapat berjalan lebih baik di resolusi layar yang berbeda-beda.
+- Aplikasi dapat menyesuaikan dan berjalan lebih baik di resolusi layar yang berbeda-beda.
 - Pengelolaan penggunaan RAM yang lebih ringan.
 - Notifikasi email dapat terkirim lebih cepat.
 - Buku yang telah dipinjam tidak tampil pada table Peminjaman Buku.
