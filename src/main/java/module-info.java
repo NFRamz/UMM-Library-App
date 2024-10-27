@@ -15,6 +15,7 @@ module Tugas_6_JavaFX{
         requires activation;
         requires java.sql;
         requires sqlite.jdbc;
+        requires dotenv.java;
 
 
         opens books to javafx.base;

@@ -1,6 +1,7 @@
 package data;
 
 import Features.Database;
+import commands.CMD;
 import util.iMenu;
 import exception.custom.IllegalAdminAccess;
 import javafx.animation.TranslateTransition;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import sound.Sound;
 
+import java.io.IOException;
 
 
 public class LoginMenu implements iMenu{
@@ -160,7 +162,14 @@ public class LoginMenu implements iMenu{
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Action Button <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-        closeButton.setOnAction(event -> primaryStage.close());
+        closeButton.setOnAction(event -> {
+            try {
+                CMD.runCommands(CMD.listCommands[1]);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            primaryStage.close();
+        });
 
         loginButton.setOnAction(event -> {
             String nim      = usernameField.getText();

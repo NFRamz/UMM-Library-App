@@ -9,8 +9,8 @@ public class CMD {
     private static final String get_directory = System.getProperty("user.dir");
     private static final String get_driveLetter = get_directory.substring(0, 2);
     public static String[][] listCommands = {
-            {"cmd.exe", "/c", get_driveLetter + " && cd " + get_directory + "\\src\\main\\java && qres x=1366 y=768"},
-            {"cmd.exe", "/c", get_driveLetter + " && cd " + get_directory + "\\src\\main\\java && "+revertResolution()}
+            {"cmd.exe", "/c", get_driveLetter + " && cd " + get_directory + " && qres x=1366 y=768"},
+            {"cmd.exe", "/c", get_driveLetter + " && cd " + get_directory + " && "+revertResolution()}
 };
 
     private static String revertResolution(){
@@ -24,6 +24,7 @@ public class CMD {
 
     public static void runCommands(String[] commands) throws IOException {
         ProcessBuilder processBuilder = new ProcessBuilder(commands);
+
         processBuilder.start();
     }
 }
