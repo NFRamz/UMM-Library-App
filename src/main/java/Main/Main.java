@@ -1,9 +1,6 @@
 /**
  * Class Main.java
  * This class is the main class of the project.
- * This class is responsible for starting the application.
- * This class extends the Application class of the JavaFX library.
- *
  */
 package Main;
 
@@ -18,7 +15,13 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-
+    /**
+     * The start method is called when the application is launched.
+     * It initializes the LoginMenu and executes the first command in the command list in CMD class.
+     *
+     * @param primaryStage the primary stage for this application, onto which
+     *                     the application scene can be set.
+     */
     @Override
     public void start(Stage primaryStage) {
         LoginMenu loginMenuObj = new LoginMenu();
