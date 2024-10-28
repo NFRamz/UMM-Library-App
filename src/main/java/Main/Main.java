@@ -22,6 +22,8 @@ public class Main extends Application {
      * @param primaryStage the primary stage for this application, onto which
      *                     the application scene can be set.
      */
+
+    //TES DEMO 3 
     @Override
     public void start(Stage primaryStage) {
         LoginMenu loginMenuObj = new LoginMenu();
