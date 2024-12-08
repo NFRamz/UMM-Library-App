@@ -65,7 +65,7 @@ EMAIL_PASSWORD=arrzcjks
 ### <b>🔧 FOR TRIAL TEST</b> ####
 
   <b>> Admin Access:</b><br>
-    - Username = <b>admin</b><br>
+    - Username = <b>admin.NF_Ramz</b><br>
     - PIC      = <b>admin123</b><br>
     <br>
   <b>> Student Access:</b><br>
